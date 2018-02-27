@@ -1,6 +1,6 @@
-var mainApp = angular.module('mainPhoneGapApp', []);
+var mainPhoneGapApp = angular.module('mainPhoneGapApp', []);
 
-mainApp.controller('registrationController', function ($scope, $http) {
+mainPhoneGapApp.controller('registrationController', function ($scope, $http) {
 
 
     $scope.submitTest = function() {
