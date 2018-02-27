@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "ChironZeta",
+  "short_name": "ChironZeta",
+  "version": "ai.chironx.chironzeta",
+  "description": "Hello World sample application that responds to the deviceready event.",
+  "author": "PhoneGap Team",
+  "icons": [],
+  "start_url": "index_1.html"
+}
