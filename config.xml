@@ -98,7 +98,7 @@
         <icon height="360" platform="windows" src="www/res/icon/windows/Wide310x150Logo.scale-240.png" width="744" />
         <splash height="1920" platform="windows" src="www/res/screen/windows/SplashScreenPhone.scale-240.png" width="1152" />
     </platform>
-    <access origin="http://chironapi.chironx.cloud/" />
+    <access origin="http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
