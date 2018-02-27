@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="mainPhoneGapApp" ng-controller="registrationController">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -10,6 +10,10 @@
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
+
+
+    <script src="./assets/js/angular-files/angular.min.js"></script>
+	<script src="./assets/js/angular-files/scriptRegistration.js"></script>
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/z_logo.png" />
 	<link rel="icon" type="image/png" href="assets/img/z_logo.png" />
 
@@ -41,7 +45,7 @@
 		            <!--      Wizard container        -->
 		            <div class="wizard-container" style="padding-top: 30px;">
 		                <div class="card wizard-card" data-color="green" id="wizardProfile">
-		                    <form action="" method="">
+		                    <form action="" method="" ng-click="submitTest()">
 		                <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
 
 		                    	<div class="wizard-header">
