@@ -45,7 +45,7 @@
 		            <!--      Wizard container        -->
 		            <div class="wizard-container" style="padding-top: 30px;">
 		                <div class="card wizard-card" data-color="green" id="wizardProfile">
-		                    <form action="" method="" ng-click="submitTest()">
+		                    <form ng-submit="submitRegistrationForm()">
 		                <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
 
 		                    	<div class="wizard-header">
@@ -82,7 +82,7 @@
 													</span>
 													<div class="form-group label-floating">
 			                                          <label class="control-label">First Name <small>(required)</small></label>
-			                                          <input name="firstname" type="text" class="form-control">
+			                                          <input name="firstname" type="text" class="form-control" ng-model="firstname">
 			                                        </div>
 												</div>
 												<div class="input-group">
@@ -91,7 +91,7 @@
 													</span>
 													<div class="form-group label-floating">
 													  <label class="control-label">Last Name <small>(required)</small></label>
-													  <input name="lastname" type="text" class="form-control">
+													  <input name="lastname" type="text" class="form-control" ng-model="lastname">
 													</div>
 												</div>
 		                                	</div>
@@ -102,7 +102,7 @@
 													</span>
 													<div class="form-group label-floating">
 			                                            <label class="control-label">Email <small>(required)</small></label>
-			                                            <input name="email" type="email" class="form-control">
+			                                            <input name="email" type="email" class="form-control" ng-model="email">
 			                                        </div>
 												</div>
 		                                	</div>
@@ -127,15 +127,16 @@
 													</span>
 													<div class="form-group label-floating">
 			                                          <label class="control-label">Institution <small>(required)</small></label>
-			                                          <input name="firstname" type="text" class="form-control">
+			                                          <input name="institution" type="text" class="form-control" ng-model="institution">
 			                                        </div>
 												</div>
 												<div class="input-group">
 													<span class="input-group-addon">
-														<i class="material-icons">assistant</i>													</span>
+														<i class="material-icons">assistant</i>
+													</span>
 													<div class="form-group label-floating">
 													  <label class="control-label">Experience <small>(required)</small></label>
-													  <input name="lastname" type="text" class="form-control">
+													  <input name="experience" type="text" class="form-control" ng-model="experience">
 													</div>
 												</div>
 		                                	</div>
@@ -146,7 +147,7 @@
 													</span>
 													<div class="form-group label-floating">
 			                                            <label class="control-label">Expert <small>(required)</small></label>
-			                                            <input name="email" type="" class="form-control">
+			                                            <input name="expert" type="" class="form-control" ng-model="expert">
 			                                        </div>
 												</div>
 		                                	</div>
@@ -198,7 +199,7 @@
 		                        <div class="wizard-footer">
 		                            <div class="pull-right">
 		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='finish' value='Finish' />
+		                                <input type='submit' class='btn btn-finish btn-fill btn-success btn-wd' name='finish' ng-model='finish' value='Finish' />
 		                            </div>
 
 		                            <div class="pull-left">
