@@ -14,4 +14,27 @@ mainPhoneGapApp.controller('imageLoaderController',['$scope','$http','$localStor
     })
 
 
+
+    $scope.min = 50;
+    $scope.max = 200;
+    $scope.brightness = 100;
+    $scope.contrast = 100;
+    $scope.minHue = 0;
+    $scope.maxHue = 360;
+    $scope.hueRotate = 0;
+
+    $scope.reset = function() {
+      $scope.min = 50;
+      $scope.max = 200;
+      $scope.brightness = 100;
+      $scope.contrast = 100;
+      $scope.minHue = 0;
+      $scope.maxHue = 360;
+      $scope.hueRotate = 0;
+
+      $(".iv-large-image").css("-webkit-filter", "none");
+      $(".iv-large-image").css("-moz-filter", "none");
+
+};
+
 }]);
