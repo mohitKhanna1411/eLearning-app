@@ -11,7 +11,7 @@ mainPhoneGapApp.controller('imageLoaderController',['$scope','$http','$localStor
         console.log(res);
         $scope.image_src=res.presignedUrl;
 
-    })
+    });
 
 
 

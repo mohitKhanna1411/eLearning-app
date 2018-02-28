@@ -20,11 +20,11 @@ mainPhoneGapApp.controller('registrationController',['$scope','$http', 'growl', 
 
         console.log(res);
         if(res.message === "Thanks for registering!!"){
-            growl.success("Thanks for registering!!",{title: 'Success!'});
+            growl.success(res.message,{title: 'Success!'});
             $window.location.href="mainDashboard.html";
         }
-        else  if(res.message === "Doctor  email already exist") {
-            growl.error("EmailID already exist, Please try again with different emailID", {title: 'Error!'});
+        else {
+            growl.error(res.message, {title: 'Error!'});
         }
     })
     }
