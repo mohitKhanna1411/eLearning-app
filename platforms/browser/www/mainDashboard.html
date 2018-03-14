@@ -132,7 +132,40 @@
           .prev, .next,.text {font-size: 11px}
         }
         </style> -->
+    <style>
 
+        button:active
+        {
+            transform: scale(.9);
+        }
+
+        #fullwidth {
+            white-space: normal;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            padding-left: 0;
+            padding-right: 0;
+            display: block;
+            text-align: center;
+            /*This will result in centering the link text, which is probably what you want -brianjohnsondesign.com*/
+        }
+
+        #brightness {
+            -webkit-transform: rotate(270deg);
+            -moz-transform: rotate(270deg);
+            -o-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+
+        row {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+    </style>
 </head>
 
 <body ng-controller="imageLoaderController">
@@ -141,35 +174,50 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-                <a class="navbar-brand" href="#"><img alt="Logo" style="width: 130px;" src="assets/img/chironzetalogo.png"></a>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img alt="Logo" style="width: 130px;" src="assets/img/chironzetalogo.png">
+                </a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <!-- <li class="active"><a href="#">Home</a></li> -->
+                    <li>
+                        <a href="#">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#myHelpModal">Contact</a>
+                    </li>
+                    <!-- Name of the user
+First date of registration
+Number of Images labelled
+Number of Images marked for review
+Number of images unreviewed -->
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="jumbotron" style="padding-top: 0px;padding-bottom: 0px;">
-        <div class="container text-center">
+    <div class="jumbotron" style="padding-top: 0px;padding-bottom: 0px; margin-bottom: 10px;">
+        <!-- <div class="container text-center">
             <h1>Lorem ipsum</h1>
             <p>Dolor sit amet, consectetur adipiscing elit...</p>
-        </div>
+        </div> -->
     </div>
 
     <div class="container-fluid bg-3 text-center">
         <div class="row">
-            <div class="col-sm-6" style="margin-bottom: 20px;">
+            <div class="col-sm-8" style="margin-bottom: 20px;/*padding-left: 8px;*/">
                 <div class="card">
                     <div class="card-image">
                         <div id="image-gallery" class="cf" style="padding: 5px;">
@@ -178,327 +226,683 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
+                <div class="row" style="padding-right: 15px; padding-left: 5px;">
+                    <!-- <div class="col-md-1" style="background: lightcoral; float: left; width: 20%">
+                                <input style="float: left" type='submit' class='btn btn-fill btn-info btn-md' name='' value='Mark for Review' id="btn-act" />
+                        </div>
+                        <div class="col-md-1" style="background: lightgreen; float: left; width: 20%">
+                                <input type='submit' class='btn btn-fill btn-info btn-md' name='' value='High Resolution' id="btn-act" />
+                        </div>
+                        <div class="col-md-1" style="background: lightcoral; float: left; width: 20%">
+                                <input style="float: left" type='submit' class='btn btn-fill btn-info btn-md' name='' value='Mark for Review' id="btn-act" />
+                        </div>
+                        <div class="col-md-1" style="background: lightgreen; float: left; width: 20%">
+                                <input type='submit' class='btn btn-fill btn-info btn-md' name='' value='High Resolution' id="btn-act" />
+                        </div> -->
+                    <div class="col-xs-6 col-sm-3" style="padding-left: 5px;padding-right: 5px;">
+                        <button id="fullwidth" style="float: left" type='submit' class='btn btn-fill btn-info btn-md' name=''>
+                            Mark for Review</button>
+                    </div>
+                    <div class="col-xs-6 col-sm-3" style="padding-left: 0px;padding-right: 5px;">
+                        <button id="fullwidth" style="float: left" type='submit' class='btn btn-fill btn-info btn-md' name=''>
+                            High Resolution</button>
+                    </div>
+
+                    <!-- Add the extra clearfix for only the required viewport -->
+                    <div class="clearfix visible-xs-block"></div>
+
+                    <div class="col-xs-6 col-sm-2" style="padding: 0px;">
+                        <button type='submit' class='btn btn-info btn-md' name=''>
+                            <span class="fa fa-sun-o"></span>
+                        </button>
+                        <!-- <input id=brightness ng-model="brightness" max="{{max}}" min="{{min}}" step="1" type="range"> -->
+                    </div>
+
+                    <div class="col-xs-6 col-sm-2" style="padding: 0px;">
+                        <button type='submit' class='btn btn-info btn-md' name=''>
+                            <span class="fa fa-adjust"></span>
+                        </button>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-2" style="padding: 0px;">
+                        <button type='submit' class='btn btn-info btn-md' name=''>
+                            <img src="assets/img/icon-color-pallete.png"></img>
+                        </button>
+                    </div>
+                </div>
+                <br>
                 <!-- <p>Card View</p>
                 <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"> -->
-                <div class="card">
-                    <div class="card-image">
-                        <div class="siema" style="height: 260px; padding: 5px;">
-                            <div style="padding: 5px;">
-                                <h3>
-                                    <u>First Stage</u>
-                                </h3> <br>
-                                <h5>Is the image of diagnosable quality at least partially?</h5>
-                                <br>
-                                <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
-                            </div>
-                            <div style="padding: 5px; padding-right:15px;">
-                                <h3>
-                                    <u>Second Stage</u>
-                                </h3>
-                                <h5>Are any of these quality issues present in the image?</h5>
-                                <br>
-                                <div class="checkbox checkbox-success checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox1" value="option1">
-                                    <label for="inlineCheckbox1"> Blurry </label>
+                <div class="row" style="padding-right: 5px; padding-left: 5px;margin-bottom: 30px;">
+                    <div class="card">
+                        <div class="card-image">
+                            <div class="siema" style="height: 260px; padding: 5px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">
+                                        <u>First Stage</u>
+                                    </h3>
+                                    <br>
+                                    <h5 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                    padding-right: 15px;padding-top: 15px;padding-bottom: 15px;"
+                                    >Is the image of diagnosable quality at least partially?</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                    <div class="col-xs-6 col-sm-4">
+                                    <button style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                        <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                    </button>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-4">
+                                    <button style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                        <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                    </button>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-4">
+                                    <button style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                        <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                    </button>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div class="checkbox checkbox-success checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox2" value="option1">
-                                    <label for="inlineCheckbox2"> Possible Cataract </label>
-                                </div>
-                                <div class="checkbox checkbox-success checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox3" value="option1">
-                                    <label for="inlineCheckbox3"> Possible Incorrect Dilation </label>
-                                </div>
-                                <div class="checkbox checkbox-success checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox4" value="option1">
-                                    <label for="inlineCheckbox4"> Lens Flash </label>
-                                </div>
-                                <div class="checkbox checkbox-success checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox5" value="option1">
-                                    <label for="inlineCheckbox5"> Lens Glare </label>
-                                </div>
-                                <div class="checkbox checkbox-success checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox6" value="option1">
-                                    <label for="inlineCheckbox6"> Incorrect Exposure </label>
-                                </div>
-                                <div class="checkbox checkbox-success checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox7" value="option1">
-                                    <label for="inlineCheckbox7"> Camera Artefact </label>
-                                </div>
-                                <div class="form-group">
-                                        <input type="text" placeholder="Other" class="form-control">
-                                      </div>
-                            </div>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">
+                                        <u>Second Stage</u>
+                                    </h3>
+                                    <h5 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                    padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;"
+                                    >Are any of these quality issues present in the image?</h5>
+                                    <br>
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td align="left">
+                                                    <div class="checkbox checkbox-success checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox1" value="Blurry">
+                                                        <label for="inlineCheckbox1"> Blurry </label>
+                                                    </div>
+                                                </td>
 
-                            
-                            <div style="padding: 5px;">
-                                    <h3>
+                                                <td align="left">
+                                                    <div class="checkbox checkbox-success checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox2" value="Possible Cataract">
+                                                        <label for="inlineCheckbox2"> Possible Cataract </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td align="left">
+                                                    <div class="checkbox checkbox-success checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox3" value="Possible Incorrect Dilation">
+                                                        <label for="inlineCheckbox3"> Possible Incorrect Dilation </label>
+                                                    </div>
+                                                </td>
+
+                                                <td align="left">
+                                                    <div class="checkbox checkbox-success checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox4" value="Lens Flash">
+                                                        <label for="inlineCheckbox4"> Lens Flash </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td align="left">
+                                                    <div class="checkbox checkbox-success checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox5" value="Lens Glare">
+                                                        <label for="inlineCheckbox5"> Lens Glare </label>
+                                                    </div>
+                                                </td>
+                                                <td align="left">
+                                                    <div class="checkbox checkbox-success checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox6" value="Incorrect Exposure">
+                                                        <label for="inlineCheckbox6"> Incorrect Exposure </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left">
+                                                    <div class="checkbox checkbox-success checkbox-inline">
+                                                        <input type="checkbox" id="inlineCheckbox7" value="Camera Artefact">
+                                                        <label for="inlineCheckbox7"> Camera Artefact </label>
+                                                    </div>
+                                                </td>
+                                                <td align="left">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Other" class="form-control">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">
                                         <u>Third Stage</u>
-                                    </h3> <br>
+                                    </h3>
+                                    <br>
                                     <h5>Are there any abnormal clinical features present?</h5>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
 
                                 <div style="padding: 5px;">
-                                        <h3>
-                                            <u>Fourth Stage</u>
-                                        </h3> <br>
-                                        <h5>Are any of these clinical features present?</h5>
-                                        <br>
-                                        <h4><u>Bull's Eye Maculopathy</u></h4>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">
+                                        <u>Fourth Stage</u>
+                                    </h3>
+                                    <br>
+                                    <h5>Are any of these clinical features present?</h5>
+                                    <br>
+                                    <h4>
+                                        <u>Bull's Eye Maculopathy</u>
+                                    </h4>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
 
                                 <div style="padding: 5px; padding-right:15px;">
-                                        <br><h3>
-                                                <u>Cherry Red Spot</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                    <br>
+                                    <h3>
+                                        <u>Cherry Red Spot</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
 
                                 <div style="padding: 5px; padding-right:15px;">
-                                        <br><h3>
-                                                <u>Choroidal Neovascularization</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                    <br>
+                                    <h3>
+                                        <u>Choroidal Neovascularization</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
 
                                 <div style="padding: 5px; padding-right:15px;">
-                                        <br><h3>
-                                                <u>Choroiretinal Folds</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                    <br>
+                                    <h3>
+                                        <u>Choroiretinal Folds</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
 
                                 <div style="padding: 5px; padding-right:15px;">
-                                        <br><h3>
-                                                <u>Cotton Wool Spot</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                    <br>
+                                    <h3>
+                                        <u>Cotton Wool Spot</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
 
                                 <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Cystoid Macular Edema</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                    <br>
+                                    <h3>
+                                        <u>Cystoid Macular Edema</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                   
-                                    
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Drusen</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+
+
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Drusen</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Flecked Retina Syndrome</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Flecked Retina Syndrome</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Foveal Yellow Spot</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Foveal Yellow Spot</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Intraretinal Haemorrhage</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Intraretinal Haemorrhage</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Lipid Exudates</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Lipid Exudates</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Macular Atrophy</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Macular Atrophy</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Optic Disc Edema With Macular Star</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Optic Disc Edema With Macular Star</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Peripheral Pigmentation</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Peripheral Pigmentation</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Pigment Epithelial Detachment</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Pigment Epithelial Detachment</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Pigmented Lesions</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Pigmented Lesions</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Preretinal Haemorrhage</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Preretinal Haemorrhage</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Retinal Crystal</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Retinal Crystal</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Retinal Neovascularization</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Retinal Neovascularization</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Retinitis</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Retinitis</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Rubeosis</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Rubeosis</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Subretinal Fluid</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Subretinal Fluid</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Tumors</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Tumors</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Vasculitis</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Vasculitis</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Vitelliform Lesions</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Vitelliform Lesions</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Vitreous Haemorrhage</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Vitreous Haemorrhage</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>Vitreous Opacity</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>Vitreous Opacity</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>White Dot Syndrome</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>White Dot Syndrome</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    <div style="padding: 5px; padding-right:15px;">
-                                        <br> <h3>
-                                                <u>White-Centred Retinal Haemorrhages</u>
-                                            </h3> <br>
-                                        <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-question-sign"></i></button>
+                                <div style="padding: 5px; padding-right:15px;">
+                                    <br>
+                                    <h3>
+                                        <u>White-Centred Retinal Haemorrhages</u>
+                                    </h3>
+                                    <br>
+                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </button>
                                 </div>
-                                    
+
+                            </div>
+
+                            <!-- <button class="prev">prev</button>
+                            <button class="next">next</button> -->
                         </div>
-
-                        <button class="prev">prev</button>
-                        <button class="next">next</button>
                     </div>
+                </div>
+                <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                                <button style="/* margin: 10px; */ border: 1px solid transparent;
+                                border-radius: 5px;height: 35px;width: 120px;color: white;background: #353535"
+                                type="button" class="prev">
+                                <span style="margin: 5px;" class="fa fa-chevron-left"></span>Previous
+                            </button>
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                                <button style="/* margin: 10px; */ border: 1px solid transparent;
+                                border-radius: 5px;height: 35px;width: 120px;color: white;background: #353535"
+                                 type="button" class="next">Next
+                                    <span style="margin: 5px;" class="fa fa-chevron-right"></span>
+                                </button>
+                        </div>
                 </div>
             </div>
         </div>
-    </div><br>
+    </div>
+    <br>
 
-    <div class="container-fluid bg-3 text-center">
+    <!-- <div class="container-fluid bg-3 text-center">
         <div class="row">
             <div class="col-sm-6">
                 <div class="card">
@@ -525,15 +929,15 @@
                                     <input type='submit' class='btn btn-fill btn-success btn-wd' name='' value='Reset' id="reset" ng-click="reset()" />
                                 </div>
                             </center>
-                            <!-- <button type="submit" class="btn-link" id="reset" ng-click="reset()"> Reset </button> -->
                             <div id="options"> </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br><br>
+    </div> -->
+    <br>
+    <br>
 
     <!-- <div class="slideshow-container">
             
@@ -619,6 +1023,114 @@
             }
     </script> -->
 
+    <!-- Help Desk Modal -->
+    <div class="modal fade" id="myHelpModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-sm" style="width: 60%">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-left: 15px; padding-right: 15px; 
+                padding-top: 5px; padding-bottom: 5px; font-weight: bold">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align: center; font-weight: bold;">Help Desk</h4>
+                </div>
+                <div class="modal-body" style="
+                padding-left: 15px;
+                padding-right: 15px;
+                padding-bottom: 15px;
+                padding-top: 5px;">
+                    <center style="background: #252525">
+                        <img src="assets/img/chironzetalogo.png" style="width: 160px; width: 40%; padding: 5px; background: #252525"></img>
+                    </center>
+                    <center>
+                        <h2 style="margin-top: 20px; margin-bottom: 0px;">Need help?</h2>
+                    </center>
+                    <center>
+                        <h4 style="margin-bottom: 10px; margin-top: 10px;"> We'd love to hear from you!</h4>
+                    </center>
+                    <br>
+                    <center>
+                        <h5 style="margin-bottom: 0px; margin-top: 10px;">For support related queries write to: </h5>
+                    </center>
+                    <center>
+                        <p style="margin-bottom: 30px;margin-top: 0px;font-size: 40px;word-break: break-all;white-space: normal;">expertsupport@chironx.ai </p>
+                    </center>
+                    <center>
+                        <h5 style="margin-bottom: 0px; margin-top: 10px;">Or Call us on: </h5>
+                    </center>
+                    <center>
+                        <p style="margin-bottom: 0px; margin-top: 0px;font-size: 40px;">+91-7707800-311</p>
+                    </center>
+                    <!-- <center><h5 style="margin-bottom: 30px; margin-top: 0px;">Working hours: 10am to 7pm</h5></center> -->
+                </div>
+                <div class="modal-footer" style="padding: 7px;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button data-toggle="modal" data-target="#myFeedbackModal" style="float: left" type="button" class="btn btn-default">Feedback</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Help Desk Modal End -->
+
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="myFeedbackModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-sm" style="width: 60%">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-left: 15px; padding-right: 15px; 
+                    padding-top: 5px; padding-bottom: 5px; font-weight: bold">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align: center; font-weight: bold;">Feedback</h4>
+                    <center>
+                        <p style="margin: 0px"> Please provide your feedback below: </p>
+                    </center>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="post" id="reused_form">
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label>How do you rate your overall experience?</label>
+                                <p>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="experience" id="radio_experience" value="bad"> Bad
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="experience" id="radio_experience" value="average"> Average
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="experience" id="radio_experience" value="good"> Good
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="comments"> Comments:</label>
+                                <textarea class="form-control" type="textarea" name="comments" id="comments" placeholder="Your Comments" maxlength="6000"
+                                    rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="name"> Your Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label for="email"> Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <button type="submit" class="btn btn-lg btn-warning btn-block">Post </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="padding: 7px;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Feedback Modal End -->
 
 </body>
 
