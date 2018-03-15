@@ -26,8 +26,8 @@
     <script src="./assets/js/angular-files/angular.min.js"></script>
     <script type="text/javascript" src='https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js'></script>
     <script src="./assets/js/angular-files/imageLoader.js"></script>
-
     <script src="./assets/js/siema.min.js"></script>
+
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
@@ -133,9 +133,7 @@
         }
         </style> -->
     <style>
-
-        button:active
-        {
+        button:active {
             transform: scale(.9);
         }
 
@@ -169,7 +167,6 @@
 </head>
 
 <body ng-controller="imageLoaderController">
-
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -216,6 +213,7 @@ Number of images unreviewed -->
     </div>
 
     <div class="container-fluid bg-3 text-center">
+        <!-- <h5 id="hiddenDiv" style="visibility: visible">0</h5> -->
         <div class="row">
             <div class="col-sm-8" style="margin-bottom: 20px;/*padding-left: 8px;*/">
                 <div class="card">
@@ -277,33 +275,33 @@ Number of images unreviewed -->
                 <div class="row" style="padding-right: 5px; padding-left: 5px;margin-bottom: 30px;">
                     <div class="card">
                         <div class="card-image">
-                            <div class="siema" style="height: 260px; padding: 5px;">
+                            <div class="siema" style="height: auto; padding: 5px;">
                                 <div style="padding: 5px;">
                                     <h3 style="margin-top: 5px;margin-bottom: 5px;">
                                         <u>First Stage</u>
                                     </h3>
                                     <br>
                                     <h5 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
-                                    padding-right: 15px;padding-top: 15px;padding-bottom: 15px;"
-                                    >Is the image of diagnosable quality at least partially?</h5>
+                                    padding-right: 15px;padding-top: 15px;padding-bottom: 15px;">Is the image of diagnosable quality at least partially?</h5>
                                     <br>
                                     <br>
                                     <div class="row">
-                                    <div class="col-xs-6 col-sm-4">
-                                    <button style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
-                                        <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
-                                    </button>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-4">
-                                    <button style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
-                                        <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
-                                    </button>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-4">
+                                        <div class="col-xs-6 col-sm-6">
+                                            <button onclick="nextSlide()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md" ng-click="setValue('goodquality')"
+                                                ng-disabled="disabledStage_1">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Yes
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6">
+                                            <button style="/* margin: 10px; */" type="button" class="btn btn-success btn-md" ng-click="nextRandomImage()" ng-disabled="disabledStage_1">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>No
+                                            </button>
+                                        </div>
+                                        <!-- <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
                                     <button style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
                                         <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
                                     </button>
-                                    </div>
+                                    </div> -->
                                     </div>
                                 </div>
                                 <div style="padding: 5px; padding-right:15px;">
@@ -311,8 +309,7 @@ Number of images unreviewed -->
                                         <u>Second Stage</u>
                                     </h3>
                                     <h5 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
-                                    padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;"
-                                    >Are any of these quality issues present in the image?</h5>
+                                    padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Are any of these quality issues present in the image?</h5>
                                     <br>
                                     <table class="table table-bordered">
                                         <tbody>
@@ -331,7 +328,6 @@ Number of images unreviewed -->
                                                     </div>
                                                 </td>
                                             </tr>
-
                                             <tr>
                                                 <td align="left">
                                                     <div class="checkbox checkbox-success checkbox-inline">
@@ -375,527 +371,801 @@ Number of images unreviewed -->
                                                     </div>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="2" align="center">
+                                                    <div class="checkbox checkbox-success checkbox-inline">
+                                                        <button onclick="nextSlide()" ng-click="setValue('qualityissues')" style="width: 100px" class="btn btn-success btn-md">Done</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
-
                                 <div style="padding: 5px;">
                                     <h3 style="margin-top: 5px;margin-bottom: 5px;">
                                         <u>Third Stage</u>
                                     </h3>
                                     <br>
-                                    <h5>Are there any abnormal clinical features present?</h5>
+                                    <h5 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                    padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Are there any abnormal clinical features present?</h5>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6">
+                                            <button onclick="nextSlide()" ng-click="setValue(clinicalfeaturespresent)" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6">
+                                            <button onclick="nextSlide()" ng-click="setValue(clinicalfeaturesabsent)" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <!-- <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                            </div> -->
+                                    </div>
                                 </div>
 
                                 <div style="padding: 5px;">
                                     <h3 style="margin-top: 5px;margin-bottom: 5px;">
                                         <u>Fourth Stage</u>
                                     </h3>
+                                    <h5 style="margin-top: 15px;">Are any of these clinical features present?</h5>
                                     <br>
-                                    <h5>Are any of these clinical features present?</h5>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                    padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">
+                                    Bull's Eye Maculopathy</h4>
                                     <br>
-                                    <h4>
-                                        <u>Bull's Eye Maculopathy</u>
-                                    </h4>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide(BullsEyeMaculopathyPresent)" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Cherry Red Spot</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Cherry Red Spot</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
+                                    <br>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Choroidal Neovascularization</h4>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Choroidal Neovascularization</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Choroiretinal Folds</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Choroiretinal Folds</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Cotton Wool Spot</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Cotton Wool Spot</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Cystoid Macular Edema</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Cystoid Macular Edema</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Drusen</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
+                                    <br>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Flecked Retina Syndrome</h4>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Drusen</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Foveal Yellow Spot</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Flecked Retina Syndrome</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Intraretinal Haemorrhage</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Foveal Yellow Spot</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Lipid Exudates</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Intraretinal Haemorrhage</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Macular Atrophy</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Lipid Exudates</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Optic Disc Edema With Macular Star</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Macular Atrophy</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Peripheral Pigmentation</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Optic Disc Edema With Macular Star</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Pigment Epithelial Detachment</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Peripheral Pigmentation</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Pigmented Lesions</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Pigment Epithelial Detachment</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Preretinal Haemorrhage</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Pigmented Lesions</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Retinal Crystal</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Preretinal Haemorrhage</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Retinal Neovascularization</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Retinal Crystal</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Retinitis</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Retinal Neovascularization</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Rubeosis</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Retinitis</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Subretinal Fluid</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Rubeosis</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Tumors</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Subretinal Fluid</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Vasculitis</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Tumors</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Vitelliform Lesions</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Vasculitis</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Vitreous Haemorrhage</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Vitelliform Lesions</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Vitreous Opacity</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Vitreous Haemorrhage</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">White Dot Syndrome</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
+                                <div style="padding: 5px;">
+                                    <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
-                                    <h3>
-                                        <u>Vitreous Opacity</u>
-                                    </h3>
+                                    <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                                        padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">White-Centred Retinal Haemorrhages</h4>
                                     <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
+                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                                <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding: 5px; padding-right:15px;">
-                                    <br>
-                                    <h3>
-                                        <u>White Dot Syndrome</u>
-                                    </h3>
-                                    <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
-                                </div>
-                                <div style="padding: 5px; padding-right:15px;">
-                                    <br>
-                                    <h3>
-                                        <u>White-Centred Retinal Haemorrhages</u>
-                                    </h3>
-                                    <br>
-                                    <button style="margin: 10px;" type="button" class="btn btn-info btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-warning btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                    <button style="margin: 10px;" type="button" class="btn btn-primary btn-circle btn-lg">
-                                        <i class="glyphicon glyphicon-question-sign"></i>
-                                    </button>
-                                </div>
+
 
                             </div>
-
-                            <!-- <button class="prev">prev</button>
-                            <button class="next">next</button> -->
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                        <div class="col-xs-6 col-sm-6">
-                                <button style="/* margin: 10px; */ border: 1px solid transparent;
-                                border-radius: 5px;height: 35px;width: 120px;color: white;background: #353535"
-                                type="button" class="prev">
-                                <span style="margin: 5px;" class="fa fa-chevron-left"></span>Previous
-                            </button>
-                        </div>
-                        <div class="col-xs-6 col-sm-6">
-                                <button style="/* margin: 10px; */ border: 1px solid transparent;
-                                border-radius: 5px;height: 35px;width: 120px;color: white;background: #353535"
-                                 type="button" class="next">Next
-                                    <span style="margin: 5px;" class="fa fa-chevron-right"></span>
-                                </button>
-                        </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <button style="/* margin: 10px; */ border: 1px solid transparent;
+                                border-radius: 5px;height: 35px;width: 120px;color: white;background: #353535" type="button"
+                            class="prev" ng-click="btnPrevCount()" ng-disabled="prevDisabled">
+                            <span style="margin: 5px;" class="fa fa-chevron-left"></span>Previous
+                        </button>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <button style="/* margin: 10px; */ border: 1px solid transparent;
+                                border-radius: 5px;height: 35px;width: 120px;color: white;background: #353535" type="button"
+                            class="next" ng-click="btnNextCount()" ng-disabled="nextDisabled">Next
+                            <span style="margin: 5px;" class="fa fa-chevron-right"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -939,38 +1209,6 @@ Number of images unreviewed -->
     <br>
     <br>
 
-    <!-- <div class="slideshow-container">
-            
-            <div class="mySlides fade">
-              <div class="numbertext">1 / 3</div>
-              <img src="assets/img/test_image.jpg" style="width:100%">
-              <div class="text">Caption Text</div>
-            </div>
-            
-            <div class="mySlides fade">
-              <div class="numbertext">2 / 3</div>
-              <img src="assets/img/test_image.jpg" style="width:100%">
-              <div class="text">Caption Two</div>
-            </div>
-            
-            <div class="mySlides fade">
-              <div class="numbertext">3 / 3</div>
-              <img src="assets/img/test_image.jpg" style="width:100%">
-              <div class="text">Caption Three</div>
-            </div>
-            
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            
-            </div>
-            <br>
-            
-            <div style="text-align:center">
-              <span class="dot" onclick="currentSlide(1)"></span> 
-              <span class="dot" onclick="currentSlide(2)"></span> 
-              <span class="dot" onclick="currentSlide(3)"></span> 
-            </div> -->
-
 
 
     <footer class="container-fluid text-center navbar-fixed-bottom" style="padding: 15px;">
@@ -984,44 +1222,22 @@ Number of images unreviewed -->
         });
 
 
+
         // Slider
-        const mySiema = new Siema();
+        const mySiema = new Siema({
+            draggable: false,
+            // onChange: swipenext,
+        });
 
         document.querySelector('.prev').addEventListener('click', () => mySiema.prev());
-
         document.querySelector('.next').addEventListener('click', () => mySiema.next());
+
+        function nextSlide() {
+            mySiema.next();
+        }
+
+
     </script>
-
-
-
-    <!-- <script>
-            var slideIndex = 1;
-            showSlides(slideIndex);
-            
-            function plusSlides(n) {
-              showSlides(slideIndex += n);
-            }
-            
-            function currentSlide(n) {
-              showSlides(slideIndex = n);
-            }
-            
-            function showSlides(n) {
-              var i;
-              var slides = document.getElementsByClassName("mySlides");
-              var dots = document.getElementsByClassName("dot");
-              if (n > slides.length) {slideIndex = 1}    
-              if (n < 1) {slideIndex = slides.length}
-              for (i = 0; i < slides.length; i++) {
-                  slides[i].style.display = "none";  
-              }
-              for (i = 0; i < dots.length; i++) {
-                  dots[i].className = dots[i].className.replace(" active", "");
-              }
-              slides[slideIndex-1].style.display = "block";  
-              dots[slideIndex-1].className += " active";
-            }
-    </script> -->
 
     <!-- Help Desk Modal -->
     <div class="modal fade" id="myHelpModal" role="dialog" tabindex="-1">
