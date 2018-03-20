@@ -6,14 +6,32 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
         }
     };
     console.log($localStorage.token);
-    $http.get('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/view/image', config).success(function (res) {
+    
+    // Get random image
+    $http.get('http://192.168.1.7:8000/api/chironx/assign/random/image', config).success(function (res) {
 
         console.log(res);
-        $scope.image_src = res.presignedUrl;
+        $scope.image_src = "assets/img/test_image.jpg";
+        console.log("Done loading");
+        // $scope.image_src = res.presignedUrl;
 
     })
+   
+       // Slider
+
+  
+    // Get the list of clinical features
+    //     $http.get('http://192.168.1.7:8000/api/chironx/list/clinical/feautres', config).success(function (res) {
+
+    //     console.log(res);
+        
+
+    // })
 
 
+
+    // $scope.image_src = "https://chironzeta.s3-ap-south-1.amazonaws.com/logo-chiron.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ3F653OXC3NUQYSA%2F20180319%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20180319T084804Z&X-Amz-Expires=10000&X-Amz-SignedHeaders=host&X-Amz-Signature=cee2a3d3303612279ab46f08dcb2447802915c2ebf144f1e88730e627a7a0e6e";
+    // $scope.image_src = "assets/img/test_image.jpg";
 
     $scope.min = 50;
     $scope.max = 200;
@@ -48,6 +66,8 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
         $http.get('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/status').success(function (res) {
             console.log(res);
             console.log("Pressed No");
+
+            $scope.image_src = "assets/img/test_image.jpg";
 
         })
     }

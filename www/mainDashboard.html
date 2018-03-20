@@ -163,6 +163,56 @@
             display: -ms-flexbox;
             display: flex;
         }
+
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+
+        input[type="range"] 
+        {
+            position: absolute;
+            top: 40%;
+            transform: rotate(270deg);
+        }
+
     </style>
 </head>
 
@@ -219,11 +269,14 @@ Number of images unreviewed -->
                 <div class="card">
                     <div class="card-image">
                         <div id="image-gallery" class="cf" style="padding: 5px;">
-                            <img src="assets/img/test_image.jpg" data-high-res-src="assets/img/test_image.jpg" alt="" class="pannable-image">
+                            <!-- <img src="assets/img/test_image.jpg" data-high-res-src="assets/img/test_image.jpg" alt="" class="pannable-image"> -->
+                            <img  ng-src="{{image_src}}" alt="" class="pannable-image">
                         </div>
                     </div>
                 </div>
             </div>
+            <link href="assets/css/hue_functions.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="assets/js/hue_functions.js"></script>
             <div class="col-sm-4">
                 <div class="row" style="padding-right: 15px; padding-left: 5px;">
                     <!-- <div class="col-md-1" style="background: lightcoral; float: left; width: 20%">
@@ -254,19 +307,21 @@ Number of images unreviewed -->
                         <button type='submit' class='btn btn-info btn-md' name=''>
                             <span class="fa fa-sun-o"></span>
                         </button>
-                        <!-- <input id=brightness ng-model="brightness" max="{{max}}" min="{{min}}" step="1" type="range"> -->
+                        <input id=brightness ng-model="brightness" max="{{max}}" min="{{min}}" step="1" type="range">
                     </div>
 
                     <div class="col-xs-6 col-sm-2" style="padding: 0px;">
                         <button type='submit' class='btn btn-info btn-md' name=''>
                             <span class="fa fa-adjust"></span>
                         </button>
+                        <input id=contrast ng-model="contrast" max="{{max}}" min="{{min}}" step="1" type="range">
                     </div>
 
                     <div class="col-xs-6 col-sm-2" style="padding: 0px;">
                         <button type='submit' class='btn btn-info btn-md' name=''>
                             <img src="assets/img/icon-color-pallete.png"></img>
                         </button>
+                        <input id=huerotate ng-model="hueRotate" max="{{maxHue}}" min="{{minHue}}" step="1" type="range">
                     </div>
                 </div>
                 <br>
@@ -275,7 +330,7 @@ Number of images unreviewed -->
                 <div class="row" style="padding-right: 5px; padding-left: 5px;margin-bottom: 30px;">
                     <div class="card">
                         <div class="card-image">
-                            <div class="siema" style="height: auto; padding: 5px;">
+                            <div class="siema" id="test" style="height: auto; padding: 5px;">
                                 <div style="padding: 5px;">
                                     <h3 style="margin-top: 5px;margin-bottom: 5px;">
                                         <u>First Stage</u>
@@ -422,24 +477,24 @@ Number of images unreviewed -->
                                     <br>
                                     <div class="row">
                                         <div class="col-xs-4 col-sm-4">
-                                            <button onclick="nextSlide(BullsEyeMaculopathyPresent)" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
+                                            <button id = "btn-create-slide" onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md">
                                                 <span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present
                                             </button>
                                         </div>
                                         <div class="col-xs-4 col-sm-4">
-                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                            <button id = "btn-create-slide" onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
                                                 <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
                                             </button>
                                         </div>
                                         <div class="col-xs-4 col-sm-4" style="padding-left: 0px;">
-                                            <button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
+                                            <button id = "btn-create-slide" onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md">
                                                 <span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear
                                             </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div style="padding: 5px;">
+                                <!-- <div style="padding: 5px;">
                                     <h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3>
                                     <br>
                                     <h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
@@ -1144,7 +1199,7 @@ Number of images unreviewed -->
                                             </button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 
                             </div>
@@ -1216,12 +1271,7 @@ Number of images unreviewed -->
     </footer>
 
     <script>
-        // Imageviewer
-        $(function () {
-            $('.pannable-image').ImageViewer();
-        });
-
-
+        
 
         // Slider
         const mySiema = new Siema({
@@ -1229,13 +1279,40 @@ Number of images unreviewed -->
             // onChange: swipenext,
         });
 
+
+        // Imageviewer
+        $(function () {
+            $('.pannable-image').ImageViewer();
+        });
+
+
+        // Get the list of clinical features
+        $.ajax({
+            type:"GET",
+            url:"http://192.168.1.7:8000/api/chironx/list/clinical/feautres",
+            headers: {
+               'Authorization':'Bearer '+ localStorage.getItem('ngStorage-token').replace(new RegExp('"', 'g'),'')},
+            success:function(responseData){
+                let arrayFeautre = responseData.data;
+                arrayFeautre.forEach(element => {
+                    let appendElement = document.createElement('div');
+            appendElement.innerHTML = '<div style="padding: 5px;"><h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3><br><h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">'+element+'</h4><br><br><div class="row"><div class="col-xs-4 col-sm-4"><button onclick="nextSlide()" ng-click="setValue()" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md"><span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present</button></div><div class="col-xs-4 col-sm-4"><button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md"><span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent</button></div><div class="col-xs-4 col-sm-4" style="padding-left: 0px;"><button onclick="nextSlide()" ng-click="setValue()" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md"><span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear</button></div></div></div>';
+            mySiema.append(appendElement);
+                });   
+            }
+        })
+
+
+        // Slider prev and next button
         document.querySelector('.prev').addEventListener('click', () => mySiema.prev());
         document.querySelector('.next').addEventListener('click', () => mySiema.next());
 
+        // To show next slide on answer
         function nextSlide() {
             mySiema.next();
         }
 
+        
 
     </script>
 
