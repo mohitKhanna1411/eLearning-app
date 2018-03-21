@@ -8,7 +8,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     console.log($localStorage.token);
     
     // Get random image
-    $http.get('http://192.168.1.7:8000/api/chironx/assign/random/image', config).success(function (res) {
+    $http.get('http://127.0.0.1:8000/api/chironx/assign/random/image', config).success(function (res) {
 
         console.log(res);
         $scope.image_src = "assets/img/test_image.jpg";

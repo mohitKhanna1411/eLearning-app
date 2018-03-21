@@ -83,16 +83,17 @@
   
   input[type=range]::-webkit-slider-thumb {
     -webkit-appearance:none;
-    width:12px;
-    height:12px;
-    background:#CCC;
-    border:7px solid grey;
+    width:15px;
+    height:25px;
+    background:rgb(255, 0, 0);
+    border:7px solid rgb(255, 255, 255);
     /* box-shadow:
       inset 0 1px 3px #000,
       0 0 2px #000; */
-    border-radius:50%;
+    border-radius:20%;
     transition:all .1s linear; 
     cursor:pointer;
+    margin: 2px;
   }
   
   input[type=range]:active::-webkit-slider-thumb {
