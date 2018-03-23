@@ -4,7 +4,8 @@
   "displayName": "ChironZeta",
   "cordova": {
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-battery-status": {},
@@ -52,6 +53,7 @@
     "cordova-plugin-vibration": "~2.1.0",
     "cordova-plugin-whitelist": "~1.2.2",
     "cordova-plugin-code-push": "~1.11.7",
-    "cordova-plugin-file": "~4.3.3"
+    "cordova-plugin-file": "~4.3.3",
+    "cordova-android": "~7.0.0"
   }
 }

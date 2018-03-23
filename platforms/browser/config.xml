@@ -8,7 +8,7 @@
         PhoneGap Team
     </author>
     <content src="index_1.html" />
-    <access origin="http://127.0.0.1:8000/" />
+    <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
