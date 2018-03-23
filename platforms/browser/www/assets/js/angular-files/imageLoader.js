@@ -7,24 +7,62 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     };
     console.log($localStorage.token);
 
+    
+    // Imageviewer
+    function imageView(image){
+     
+        var curImageIdx = 1,
+            total = image.length;
+        var wrapper = $('#image-gallery'),
+            curSpan = wrapper.find('.current');
+        var viewer = ImageViewer(wrapper.find('.image-container'));
+     
+        function showImage(){
+            var imgObj = image[curImageIdx - 1];
+            viewer.load(imgObj.small, imgObj.big);
+            curSpan.html(curImageIdx);
+        }
+     
+        //initially show image
+        showImage();
+    
+    }
+
+
     // Get random image
-    // $http.get('http://192.168.0.109:8000/api/chironx/assign/random/image', config).success(function (res) {
+    $http.get('http://192.168.0.109:8000/api/chironx/assign/random/image', config).success(function (res) {
 
-    //     console.log(res);
-    //     $scope.image_src = "assets/img/test_image.jpg";
-    //     console.log("Done loading");
-    //     // $scope.image_src = res.presignedUrl;
+        console.log(res);
+        // $scope.image_src = "assets/img/test_image.jpg";
+        console.log("Done loading");
+        $scope.image_src = res.presignedUrl;
 
-    // })
+        var images=[];
+        var imageArr={};
+    
+              imageArr={
+                small : res.presignedUrl,
+                big : res.presignedUrl
+    
+              };
+             images.push(imageArr);
+    
+          console.log(images);
+          imageView(images);
+
+    })
+        
+
 
     // Get the list of clinical features
-    //     $http.get('http://192.168.1.7:8000/api/chironx/list/clinical/feautres', config).success(function (res) {
-    //     console.log(res);
-    // })
+        $http.get('http://192.168.1.7:8000/api/chironx/list/diagnosis', config).success(function (res) {
+        console.log(res.data);
+        $scope.listDiagnosis = res.data;
+    });
 
 
 
-    // $scope.image_src = "https://chironzeta.s3-ap-south-1.amazonaws.com/logo-chiron.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ3F653OXC3NUQYSA%2F20180319%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20180319T084804Z&X-Amz-Expires=10000&X-Amz-SignedHeaders=host&X-Amz-Signature=cee2a3d3303612279ab46f08dcb2447802915c2ebf144f1e88730e627a7a0e6e";
+    // $scope.image_src = "https://chironzeta.s3-ap-south-1.amazonaws.com/output0.15169263900178676.fin.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ3F653OXC3NUQYSA%2F20180323%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20180323T131141Z&X-Amz-Expires=10000&X-Amz-SignedHeaders=host&X-Amz-Signature=2a80ce7c364aa80aa9aa3883af7747046f741a1c1bafd5c7b46b74ef0752e713";
     // $scope.image_src = "assets/img/test_image.jpg";
 
     $scope.min = 50;
@@ -281,8 +319,6 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
             console.log("Max - " + $scope.maxReached);
         }
     };
-$scope.mk = function(){
-    console.log("present");
-}
+
 
 }]);
