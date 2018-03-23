@@ -18,9 +18,10 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     // })
 
     // Get the list of clinical features
-    //     $http.get('http://192.168.1.7:8000/api/chironx/list/clinical/feautres', config).success(function (res) {
-    //     console.log(res);
-    // })
+        $http.get('http://192.168.1.7:8000/api/chironx/list/diagnosis', config).success(function (res) {
+        console.log(res.data);
+        $scope.listDiagnosis = res.data;
+    });
 
 
 
