@@ -551,46 +551,8 @@
                         <div class="card-image">
                             <div class="siema" id="test" style="height: auto; padding: 5px;">
 
-                                <div style="padding: 5px;">
-                                    <h3 style="margin-top: 0px;margin-bottom: 0px;">
-                                        <u>Fifth Stage</u>
-                                    </h3>
-                                    <!-- <br> -->
-                                    <h5 onclick="nextSlide()" style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
-                                            padding-right: 15px;padding-top: 10px;padding-bottom: 10px;margin-top: 10px;margin-bottom: 0px;">Suggested diagnosis</h5>
-                                    <!-- <br> -->
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div style="margin-left: 15px;margin-right: 30px;" id="myDIV" class="header">
-                                   
-                                                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-
-                                                    <span onclick="newElement()" id="addBtn">Add</span>
-
-
-                                            <ul id="myUL" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 132px;">
-                                                <li ng-repeat="diagnosis in listDiagnosis track by $index"><a>{{diagnosis}}</a></li>
-                                                <!-- <li><a href="#">Adele</a></li>
-                                                <li><a href="#">Agnes</a></li>
-                                              
-                                                <li><a href="#">Billy</a></li>
-                                                <li><a href="#">Bob</a></li>
-                                              
-                                                <li><a href="#">Calvin</a></li>
-                                                <li><a href="#">Christina</a></li>
-                                                <li><a href="#">Cindy</a></li> -->
-                                            </ul>
-
-                                            <ul id="myUL1" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 115px;margin-top: 15px;">
-                                            </ul>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                                <!-- Diagnosis List Script Start -->
                                 <script>
-
                                     function myFunction() {
                                         var input, filter, ul, li, a, i;
                                         input = document.getElementById("myInput");
@@ -618,6 +580,9 @@
                                         };
                                     }
 
+                                    var diagnosisList = [];
+                                    var testvar = 'asdasdasdasdasd';
+
                                     // Create a "close" button and append it to each list item
                                     var myNodelist = document.getElementsByClassName("selectedli");
                                     var i;
@@ -636,6 +601,7 @@
                                         close[i].onclick = function () {
                                             var div = this.parentElement;
                                             div.style.display = "none";
+                                            console.log();
                                         }
                                     }
 
@@ -658,6 +624,11 @@
                                             alert("You must write something!");
                                         } else {
                                             document.getElementById("myUL1").appendChild(li);
+                                            
+                                            // Setting diagnosis value
+                                            diagnosisList.push(inputValue);
+                                            console.log(diagnosisList);
+
                                         }
                                         document.getElementById("myInput").value = "";
 
@@ -671,10 +642,14 @@
                                             close[i].onclick = function () {
                                                 var div = this.parentElement;
                                                 div.style.display = "none";
+
+                                                console.log(div.innerHTML+"---"+(i-1));
+
                                             }
                                         }
                                     }
                                 </script>
+                                <!-- Diagnosis List Script End -->
 
 
                                 <div style="padding: 5px;">
@@ -800,7 +775,7 @@
                                             </button>
                                         </div>
                                         <div class="col-xs-6 col-sm-6">
-                                            <button ng-disabled="disabledStage_3" ng-click="setValueLevel3('absent')" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
+                                            <button ng-disabled="disabledStage_3" onclick="takeMeToFirstSlide()" ng-click="setValueLevel3('absent')" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md">
                                                 <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent
                                             </button>
                                         </div>
@@ -849,7 +824,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="pevNextDiv">
                     <div class="col-xs-6 col-sm-6">
                         <button style="/* margin: 10px; */ border: 1px solid transparent;
                                 border-radius: 5px;height: 35px;width: 120px;color: white;background: #353535" type="button"
@@ -864,6 +839,28 @@
                             <span style="margin: 5px;" class="fa fa-chevron-right"></span>
                         </button>
                     </div>
+                </div>
+                <div class="row" id="submitDiv" style="display: none">
+                        <div class="col-xs-4 col-sm-4">
+                                <button style="/* margin: 10px; */ border: 1px solid transparent;
+                                        border-radius: 5px;height: 35px;width: 60px;color: white;background: #353535" type="button"
+                                    class="" onclick="prevSlide()" ng-click="btnPrevCount()" ng-disabled="prevDisabled">
+                                    <span style="margin: 5px;" class="fa fa-chevron-left"></span>
+                                </button>
+                            </div>
+                            <div class="col-xs-4 col-sm-4" style="padding: 0px;">
+                                    <button class = "btn btn-success btn-md" style="/* margin: 10px; */ border: 1px solid transparent;
+                                            border-radius: 5px;height: 35px;width: 100px;color: white;background: #353535" type="button"
+                                         onclick = "takeMeToFirstSlide()" ng-click="stage5SaveAllDetail()" >Submit
+                                    </button>
+                            </div>
+                            <div class="col-xs-4 col-sm-4">
+                                <button style="/* margin: 10px; */ border: 1px solid transparent;
+                                        border-radius: 5px;height: 35px;width:  60px;color: white;background: #353535" type="button"
+                                    class=""  onclick="nextSlide()" ng-click="btnNextCount()" ng-disabled="nextDisabled">
+                                    <span style="margin: 5px;" class="fa fa-chevron-right"></span>
+                                </button>
+                            </div>
                 </div>
             </div>
         </div>
@@ -944,7 +941,7 @@
                 let count = 1;
                 arrayFeautre.forEach(element => {
                     let pre = prefix + count.toString();
-                    console.log(pre)
+                    // console.log(pre)
                     let P = "setValueLevel4('" + element + "','Present'," + count + ")";
                     let A = "setValueLevel4('" + element + "','Absent'," + count + ")";
                     let U = "setValueLevel4('" + element + "','Unclear'," + count + ")";
@@ -959,10 +956,11 @@
                     // appendElement.innerHTML = '<div style="padding: 5px;"><h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3><br><h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">'+element+'</h4><br><br><div class="row"><div class="col-xs-4 col-sm-4"><button onclick="nextSlide()" ng-click="setValueLevel4('+element+',"Present")" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md"><span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present</button></div><div class="col-xs-4 col-sm-4"><button onclick="nextSlide()" ng-click="setValueLevel4("'+element+'","Absent")" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md"><span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent</button></div><div class="col-xs-4 col-sm-4" style="padding-left: 0px;"><button onclick="nextSlide()" ng-click="setValueLevel4("'+element+'","Unclear")" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md"><span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear</button></div></div></div>';
                     // appendElement.innerHTML = '<div style="padding: 5px;"><h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3><br><h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">'+element+'</h4><br><br><div class="row"><div class="col-xs-4 col-sm-4"><button ng-disabled="disabledStage_'+pre+'" onclick="nextSlide()" ng-click="'+P+'" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md"><span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present</button></div><div class="col-xs-4 col-sm-4"><button ng-disabled="disabledStage_'+pre+'" onclick="nextSlide()" ng-click="'+A+'" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md"><span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent</button></div><div class="col-xs-4 col-sm-4" style="padding-left: 0px;"><button ng-disabled="disabledStage_'+pre+'" onclick="nextSlide()" ng-click="'+U+'" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md"><span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear</button></div></div></div>';
                     appendElement.innerHTML = '<div style="padding: 5px;"><h3 style="margin-top: 5px;margin-bottom: 5px;">Clinical Feature</h3><br><h4 style="background-color: moccasin; margin-right: 10px;padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">' + element + '</h4><br><br><div class="row"><div class="col-xs-4 col-sm-4"><button ng-disabled="disabledStage_' + pre + '" onclick="nextSlide()" ng-click="' + P + '" style="/*margin: 10px;*/" type="button" class="btn btn-primary btn-md"><span style="margin-right: 5px;" class="fa fa-check" aria-hidden="true"></span>Present</button></div><div class="col-xs-4 col-sm-4"><button ng-disabled="disabledStage_' + pre + '" onclick="nextSlide()" ng-click="' + A + '" style="/* margin: 10px; */" type="button" class="btn btn-success btn-md"><span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>Absent</button></div><div class="col-xs-4 col-sm-4" style="padding-left: 0px;"><button ng-disabled="disabledStage_' + pre + '" onclick="nextSlide()" ng-click="' + U + '" style="/* margin: 10px; */" type="button" class="btn btn-warning btn-md"><span style="margin-right: 5px;" class="fa fa-question" aria-hidden="true"></span>Unclear</button></div></div></div>';
-                    // if(count === 18)
-                    // {
-                    //     appendElement.innerHTML = "HELLO";
-                    // }
+                    if(count === 18)
+                    {
+                        appendElement.innerHTML = '<div style="padding: 5px;"><h3 style="margin-top: 0px;margin-bottom: 0px;"><u>Fifth Stage</u></h3><h5 ng-click="stage5SaveAllDetail()" style="background-color: moccasin; margin-right: 10px;padding-left: 15px;padding-right: 15px;padding-top: 10px;padding-bottom: 10px;margin-top: 10px;margin-bottom: 0px;">Suggested diagnosis</h5><div class="row" style="margin-top: 10px;"><div style="margin-left: 15px;margin-right: 30px;" id="myDIV" class="header"><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"><span onclick="newElement()" id="addBtn">Add</span><ul id="myUL" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 132px;"><div id = "diaglist"></div></ul><ul id="myUL1" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 115px;margin-top: 15px;"></ul></div></div></div>';
+                        
+                    }
                     mySiema.append(appendElement);
                 });
             }
@@ -975,7 +973,19 @@
 
         // To show next slide on answer
         function nextSlide() {
+            console.log("Next Called");
             mySiema.next();
+        }
+
+        function prevSlide()
+        {
+            console.log("Prev Called");
+            mySiema.prev();
+        }
+
+        function takeMeToFirstSlide()
+        {
+            // mySiema.goTo(0);
         }
 
         var isVisibleB = false;
@@ -1139,3 +1149,121 @@
 </body>
 
 </html>
+
+
+<!-- DO NOT DELETE THIS PLEASE -->
+
+<!-- <div style="padding: 5px;">
+        <h3 style="margin-top: 0px;margin-bottom: 0px;">
+            <u>Fifth Stage</u>
+        </h3>
+        
+        <h5 onclick="nextSlide()" style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
+                padding-right: 15px;padding-top: 10px;padding-bottom: 10px;margin-top: 10px;margin-bottom: 0px;">Suggested diagnosis</h5>
+        
+        <div class="row" style="margin-top: 10px;">
+
+            <div style="margin-left: 15px;margin-right: 30px;" id="myDIV" class="header">
+       
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+                        <span onclick="newElement()" id="addBtn">Add</span>
+
+
+                <ul id="myUL" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 132px;">
+                    <li ng-repeat="diagnosis in listDiagnosis track by $index"><a>{{diagnosis}}</a></li>
+                   
+                </ul>
+
+                <ul id="myUL1" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 115px;margin-top: 15px;">
+                </ul>
+                
+            </div>
+        </div>
+    </div> -->
+    
+    <!-- <script>
+            function myFunction() {
+                var input, filter, ul, li, a, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("myUL");
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    a = li[i].getElementsByTagName("a")[0];
+                    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+
+                    }
+                }
+                function getEventTarget(e) {
+                    e = e || window.event;
+                    return e.target || e.srcElement;
+                }
+
+                var ul = document.getElementById('myUL');
+                ul.onclick = function (event) {
+                    var target = getEventTarget(event);
+                    input.value = target.innerHTML;
+                };
+            }
+
+            // Create a "close" button and append it to each list item
+            var myNodelist = document.getElementsByClassName("selectedli");
+            var i;
+            for (i = 0; i < myNodelist.length; i++) {
+                var span = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                span.className = "closeli";
+                span.appendChild(txt);
+                myNodelist[i].appendChild(span);
+            }
+
+            // Click on a close button to hide the current list item
+            var close = document.getElementsByClassName("closeli");
+            var i;
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
+            }
+
+            // // Add a "checked" symbol when clicking on a list item
+            // var list = document.querySelector('ul');
+            // list.addEventListener('click', function(ev) {
+            //   if (ev.target.tagName === 'LI') {
+            //     ev.target.classList.toggle('checked');
+            //   }
+            // }, false);
+
+            // Create a new list item when clicking on the "Add" button
+            function newElement() {
+                var li = document.createElement("li");
+                li.className = "selectedli";
+                var inputValue = document.getElementById("myInput").value;
+                var t = document.createTextNode(inputValue);
+                li.appendChild(t);
+                if (inputValue === '') {
+                    alert("You must write something!");
+                } else {
+                    document.getElementById("myUL1").appendChild(li);
+                }
+                document.getElementById("myInput").value = "";
+
+                var span = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                span.className = "closeli";
+                span.appendChild(txt);
+                li.appendChild(span);
+
+                for (i = 0; i < close.length; i++) {
+                    close[i].onclick = function () {
+                        var div = this.parentElement;
+                        div.style.display = "none";
+                    }
+                }
+            }
+        </script>-->
