@@ -1,5 +1,5 @@
-var mainPhoneGapApp = angular.module('mainPhoneGapApp', ['ngStorage']);
-mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localStorage', function ($scope, $http, $localStorage) {
+var mainPhoneGapApp = angular.module('mainPhoneGapApp', ['ngStorage','angular-growl']);
+mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localStorage','growl', function ($scope, $http, $localStorage,growl) {
     var config = {
         headers: {
             "Authorization": "Bearer " + $localStorage.token
@@ -28,34 +28,62 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     
     }
 
-
-    // Get random image
-    $http.get('http://192.168.0.109:8000/api/chironx/assign/random/image', config).success(function (res) {
-
-        console.log(res);
-        // $scope.image_src = "assets/img/test_image.jpg";
-        console.log("Done loading");
-        $scope.image_src = res.presignedUrl;
-
+    setDefaultImage = function()
+    {
         var images=[];
         var imageArr={};
     
               imageArr={
-                small : res.presignedUrl,
-                big : res.presignedUrl
+                small : './assets/img/chironzetalogo.png',
+                big : './assets/img/chironzetalogo.png'
     
               };
              images.push(imageArr);
     
           console.log(images);
           imageView(images);
+    }
+
+
+    // Get random image
+    $http.get('http://192.168.0.109:8000/api/chironx/assign/random/image', config).success(function (res) {
+
+        console.log(res);
+
+        if(res.image === 0)
+        {
+            growl.success('All current images have been marked!',{title: 'Success'});
+            $("#test *").attr("disabled", "disabled").off('click');
+            setDefaultImage();
+        }
+        else
+        {
+            $scope.imageObject = res.image;
+            // $scope.image_src = "assets/img/test_image.jpg";
+            console.log("Done loading");
+            $scope.image_src = res.presignedUrl;
+    
+            var images=[];
+            var imageArr={};
+        
+                  imageArr={
+                    small : res.presignedUrl,
+                    big : res.presignedUrl
+        
+                  };
+                 images.push(imageArr);
+        
+              console.log(images);
+              imageView(images);
+        }
+        
 
     })
         
 
 
     // Get the list of clinical features
-        $http.get('http://192.168.1.7:8000/api/chironx/list/diagnosis', config).success(function (res) {
+        $http.get('http://192.168.0.109:8000/api/chironx/list/diagnosis', config).success(function (res) {
         console.log(res.data);
         $scope.listDiagnosis = res.data;
     });
@@ -144,7 +172,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
 
     }
     
-    // Stage - 1 - Quality
+    // Stage - 1 - Quality Diagnosable
     $scope.setValueLevel1 = function(){
         
         $scope.quality = 'Good';
@@ -157,6 +185,62 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
          checkcounter();
         
     }
+
+    // Stage - 1 - Quality Bad/Non Diagnosable
+    $scope.setValueBadLevel1 = function(){
+        
+        $scope.quality = 'Non Diagnosable';
+
+        data = {
+            image : $scope.imageObject,
+            quality : $scope.quality
+        }
+        
+        $http.post('http://192.168.0.109:8000/api/chironx/markBad/assign/random/image', data,config).success(function (res) {
+            console.log(res);
+
+            if(res.image === 0)
+        {
+            growl.success('All current images have been marked!',{title: 'Success'});
+            $("#test *").attr("disabled", "disabled").off('click');
+
+            setDefaultImage();
+           
+        }
+        else
+        {
+            $scope.imageObject = res.image;
+            // $scope.image_src = "assets/img/test_image.jpg";
+            console.log("Done loading");
+            $scope.image_src = res.presignedUrl;
+    
+            var images=[];
+            var imageArr={};
+        
+                  imageArr={
+                    small : res.presignedUrl,
+                    big : res.presignedUrl
+        
+                  };
+                 images.push(imageArr);
+        
+              console.log(images);
+              imageView(images);
+        }
+
+
+
+        });
+
+        // // prev and next button enable/disable
+        //  $scope.disabledStage_1 = true;
+        //  $scope.prevDisabled = false;
+
+        //  // Setting prev and next counters
+        //  checkcounter();
+         
+    }
+
 
     // Stage - 2 - Quality Issues
     $scope.setValueLevel2 = function () {

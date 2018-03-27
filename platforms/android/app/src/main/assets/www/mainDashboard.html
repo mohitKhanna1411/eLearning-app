@@ -31,6 +31,9 @@
     <script src="./assets/js/angular-files/imageLoader.js"></script>
     <script src="./assets/js/siema.min.js"></script>
 
+    <script src="./assets/js/angular-files/angular-growl.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/angular-growl.min.css">
+
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
@@ -321,7 +324,7 @@
             border: 1px solid #ddd;
             margin-top: -1px;
             /* Prevent double borders */
-            background-color: #f6f6f6;
+            background-color: #dff0d8;
             padding: 5px;
             text-decoration: none;
             font-size: 16px;
@@ -332,26 +335,26 @@
         /* Set all odd list items to a different color (zebra-stripes) */
 
         #myUL1 li:nth-child(odd) {
-            background: #f9f9f9;
+            background: #dff0d8;
         }
 
         /* Darker background-color on hover */
 
-        #myUL1 li:hover {
+        /* #myUL1 li:hover {
             background: #ddd;
-        }
+        } */
 
         /* When clicked on, add a background color and strike out text */
 
-        #myUL1 li.checked {
+        /* #myUL1 li.checked {
             background: #888;
             color: #fff;
             text-decoration: line-through;
-        }
+        } */
 
         /* Add a "checked" mark when clicked on */
 
-        #myUL1 li.checked::before {
+        /* #myUL1 li.checked::before {
             content: '';
             position: absolute;
             border-color: #fff;
@@ -362,7 +365,7 @@
             transform: rotate(45deg);
             height: 15px;
             width: 7px;
-        }
+        } */
 
         /* Style the close button */
 
@@ -398,7 +401,9 @@
         }
     </style>
 </head>
+
 <body ng-controller="imageLoaderController" style="overflow-y: auto">
+    <div growl class="growl-container growl-fixed middle-center"></div>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -420,6 +425,7 @@
                     <li>
                         <a href="#" data-toggle="modal" data-target="#myHelpModal">Contact</a>
                     </li>
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -549,30 +555,33 @@
                                     <h3 style="margin-top: 0px;margin-bottom: 0px;">
                                         <u>Fifth Stage</u>
                                     </h3>
-                                    <br>
+                                    <!-- <br> -->
                                     <h5 onclick="nextSlide()" style="background-color: moccasin; margin-right: 10px;padding-left: 15px;
-                                            padding-right: 15px;padding-top: 15px;padding-bottom: 15px;margin-top: 0px;margin-bottom: 0px;">Suggested diagnosis</h5>
-                                    <br>
-                                    <div class="row">
+                                            padding-right: 15px;padding-top: 10px;padding-bottom: 10px;margin-top: 10px;margin-bottom: 0px;">Suggested diagnosis</h5>
+                                    <!-- <br> -->
+                                    <div class="row" style="margin-top: 10px;">
 
                                         <div style="margin-left: 15px;margin-right: 30px;" id="myDIV" class="header">
-                                            <!-- <div class="col-xs-6 col-sm-6"> -->
+                                   
                                                     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 
-                                            <!-- </div> -->
-
-                                            <!-- <div class="col-xs-6 col-sm-6"> -->
                                                     <span onclick="newElement()" id="addBtn">Add</span>
-
-                                            <!-- </div> -->
 
 
                                             <ul id="myUL" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 132px;">
-                                                    <li ng-repeat="diagnosis in listDiagnosis">{{diagnosis}}</li>
-                                                </ul>
+                                                <li ng-repeat="diagnosis in listDiagnosis track by $index"><a>{{diagnosis}}</a></li>
+                                                <!-- <li><a href="#">Adele</a></li>
+                                                <li><a href="#">Agnes</a></li>
+                                              
+                                                <li><a href="#">Billy</a></li>
+                                                <li><a href="#">Bob</a></li>
+                                              
+                                                <li><a href="#">Calvin</a></li>
+                                                <li><a href="#">Christina</a></li>
+                                                <li><a href="#">Cindy</a></li> -->
+                                            </ul>
 
-                                            <ul id="myUL1">
-                                                  
+                                            <ul id="myUL1" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 115px;margin-top: 15px;">
                                             </ul>
                                             
                                         </div>
@@ -685,7 +694,7 @@
                                             </button>
                                         </div>
                                         <div class="col-xs-6 col-sm-6">
-                                            <button style="/* margin: 10px; */" type="button" class="btn btn-success btn-md" ng-click="nextRandomImage()" ng-disabled="disabledStage_1">
+                                            <button style="/* margin: 10px; */" type="button" class="btn btn-success btn-md" ng-click="setValueBadLevel1()" ng-disabled="disabledStage_1">
                                                 <span style="margin-right: 5px;" class="fa fa-times" aria-hidden="true"></span>No
                                             </button>
                                         </div>
