@@ -506,9 +506,25 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
             }
 
         });
+    }
 
-       
+    $scope.skipImage = function()
+    {
+        data = {
+            image: $scope.imageObject
+        }
+        $http.post('http://192.168.0.111:8000/api/chironx/mark/review', data, config).success(function (res) {
+            console.log(res);
 
+            if(res.message === "Image Skipped")
+            {
+                $window.location.reload();
+            }
+            else
+            {
+                growl.error(res.message, { title: 'Failure' });
+            }
+        });
     }
 
 
