@@ -1,5 +1,5 @@
 var mainPhoneGapApp = angular.module('mainPhoneGapApp', ['ngStorage', 'angular-growl']);
-mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localStorage', 'growl', '$compile','$window', function ($scope, $http, $localStorage, growl, $compile, $window) {
+mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localStorage', 'growl', '$compile', '$window', function ($scope, $http, $localStorage, growl, $compile, $window) {
     var config = {
         headers: {
             "Authorization": "Bearer " + $localStorage.token
@@ -48,7 +48,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     // Get random image
     getRandomImage = function () {
         // Get random image
-        $http.get('http://192.168.0.109:8000/api/chironx/assign/random/image', config).success(function (res) {
+        $http.get('http://192.168.0.111:8000/api/chironx/assign/random/image', config).success(function (res) {
 
             console.log(res);
 
@@ -84,7 +84,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
 
 
     // Get the list of clinical features
-    $http.get('http://192.168.0.109:8000/api/chironx/list/diagnosis', config).success(function (res) {
+    $http.get('http://192.168.0.111:8000/api/chironx/list/diagnosis', config).success(function (res) {
         // console.log(res.data);
         $scope.listDiagnosis = res.data;
     });
@@ -190,24 +190,25 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
             quality: $scope.quality
         }
 
-        $http.post('http://192.168.0.109:8000/api/chironx/markBad/assign/random/image', data, config).success(function (res) {
+        console.log(data);
+
+        $http.post('http://192.168.0.111:8000/api/chironx/markBad/assign/random/image', data, config).success(function (res) {
             console.log(res);
 
-            if(res.message === "Image Label Updated")
-            {
+            if (res.message === "Image Label Updated") {
                 getRandomImage();
             }
-            else{
+            else {
                 growl.error(res.message, { title: 'Failure' });
             }
         });
 
-        // prev and next button enable/disable
-        //  $scope.disabledStage_1 = true;
-        //  $scope.prevDisabled = false;
+         // prev and next button enable/disable
+         $scope.disabledStage_1 = true;
+         $scope.prevDisabled = false;
 
-        //  // Setting prev and next counters
-        //  checkcounter();
+         // Setting prev and next counters
+         checkcounter();
 
     }
 
@@ -269,9 +270,9 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
 
             console.log(data);
 
-            $http.post('http://192.168.0.109:8000/api/chironx/save/partialResult', data, config).success(function (res) {
+            $http.post('http://192.168.0.111:8000/api/chironx/save/partialResult', data, config).success(function (res) {
                 console.log(res);
-    
+
                 if(res.message === "Stage 3 Updated")
                 {
                     $window.location.reload();
@@ -281,7 +282,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
 
                     // // SET COUNTERS
                     // $('#disabledStage_2').find('*').prop('disabled',false);
-                    
+
                     // $scope.Other = "";
                     // $scope.disabledStage_1 = false;
                     // $scope.counter = 0;
@@ -359,8 +360,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
         }
         console.log(data);
 
-        if(counter === 16)
-        {
+        if (counter === 16) {
             var DIV = document.getElementById("pevNextDiv");
             DIV.style.display = "none";
 
@@ -371,9 +371,9 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     }
 
     // Stage 5 Diagnosis
-    $scope.stage5SaveAllDetail = function(diagnosisList){
+    $scope.stage5SaveAllDetail = function (diagnosisList) {
 
-        console.log($window.diagnosisList);
+        // console.log($window.diagnosisList);
         data = {
             image: $scope.imageObject,
             quality: $scope.quality,
@@ -385,47 +385,48 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
             diagList: $window.diagnosisList
         }
 
-        $http.post('http://192.168.0.109:8000/api/chironx/save/allResult', data, config).success(function (res) {
-                console.log(res);
-    
-                if(res.message === "All Results Saved")
-                {
-                    // // NEXT RANDOM IMAGE CODE
-                    // getRandomImage();
+        console.log(data);
 
-                    $window.location.reload();
+        $http.post('http://192.168.0.111:8000/api/chironx/save/allResult', data, config).success(function (res) {
+            console.log(res);
 
-                    // // SET COUNTERS
-                    // $('#disabledStage_2').find('*').prop('disabled',false);
+            if (res.message === "All Results Saved") {
+                // // NEXT RANDOM IMAGE CODE
+                // getRandomImage();
 
-                    // $scope.Other = "";
-                    // $scope.disabledStage_1 = false;
-                    // $scope.disabledStage_3 = false;
-                    // $scope.disabledStage_4 = false;
-                    // $scope.counter = 0;
-                    // $scope.maxReached = 0;
+                $window.location.reload();
 
-                    // for(count=0;count<=16;count++)
-                    // {
-                    //     console.log("disabledStage_Feat" + count.toString());
-                    //     $scope["disabledStage_Feat" + count.toString()] = false;
-                    // }
-                    
-                    var DIV = document.getElementById("pevNextDiv");
-                    DIV.style.display = "block";
+                // // SET COUNTERS
+                // $('#disabledStage_2').find('*').prop('disabled',false);
 
-                    var SUBDIV = document.getElementById("submitDiv");
-                    SUBDIV.style.display = "none";
+                // $scope.Other = "";
+                // $scope.disabledStage_1 = false;
+                // $scope.disabledStage_3 = false;
+                // $scope.disabledStage_4 = false;
+                // $scope.counter = 0;
+                // $scope.maxReached = 0;
 
-                    // $scope.prevDisabled = true;
-                    // $scope.nextDisabled = true;
-                }
-                else{
-                    growl.error(res.message, { title: 'Failure' });
-                }
-            });
+                // for(count=0;count<=16;count++)
+                // {
+                //     console.log("disabledStage_Feat" + count.toString());
+                //     $scope["disabledStage_Feat" + count.toString()] = false;
+                // }
 
-        
+                var DIV = document.getElementById("pevNextDiv");
+                DIV.style.display = "block";
+
+                var SUBDIV = document.getElementById("submitDiv");
+                SUBDIV.style.display = "none";
+
+                // $scope.prevDisabled = true;
+                // $scope.nextDisabled = true;
+            }
+            else {
+                growl.error(res.message, { title: 'Failure' });
+            }
+        });
+
+
 
 
     }
@@ -474,7 +475,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
             console.log("Max - " + $scope.maxReached);
         }
     };
-    
+
 
 
 }]);

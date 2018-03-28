@@ -6,7 +6,7 @@ mainPhoneGapApp.controller('loginController',['$scope','$http','$window','$local
     $scope.loginDoctor = function() {
         var loginData={"email" : $scope.email, "hashedPassword" : $scope.password};
         // $http.post('http://192.168.1.7:8000/api/chironx/authenticate/login',loginData).success(function(res){
-        $http.post('http://192.168.0.109:8000/api/chironx/authenticate/login',loginData).success(function(res){
+        $http.post('http://192.168.0.111:8000/api/chironx/authenticate/login',loginData).success(function(res){
             console.log(res);
             //$scope.token=res.token;
             $localStorage.token=res.token;
@@ -18,7 +18,7 @@ mainPhoneGapApp.controller('loginController',['$scope','$http','$window','$local
     $scope.forgotPassword = function() {
         console.log("hi");
         var data={"email" : $scope.email};
-        $http.post('http://192.168.0.109:8000/api/chironx/authenticate/forgetpwd',data).success(function(res){
+        $http.post('http://192.168.0.111:8000/api/chironx/authenticate/forgetpwd',data).success(function(res){
 
             console.log(res);
             // $window.location.href="index.html";
