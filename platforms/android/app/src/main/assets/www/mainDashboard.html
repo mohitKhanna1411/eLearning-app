@@ -1097,19 +1097,19 @@
                     </center>
                 </div>
                 <div class="modal-body">
-                    <form role="form" method="post" id="reused_form">
+                    <form role="form" ng-submit="sendFeedback()" id="reused_form">
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label>How do you rate your overall experience?</label>
                                 <p>
                                     <label class="radio-inline">
-                                        <input type="radio" name="experience" id="radio_experience" value="bad"> Bad
+                                        <input ng-model="rating" type="radio" name="experience" id="radio_experience" value="bad"> Bad
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="experience" id="radio_experience" value="average"> Average
+                                        <input ng-model="rating" type="radio" name="experience" id="radio_experience" value="average"> Average
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="experience" id="radio_experience" value="good"> Good
+                                        <input ng-model="rating" type="radio" name="experience" id="radio_experience" value="good"> Good
                                     </label>
                                 </p>
                             </div>
@@ -1117,18 +1117,18 @@
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label for="comments"> Comments:</label>
-                                <textarea class="form-control" type="textarea" name="comments" id="comments" placeholder="Your Comments" maxlength="6000"
+                                <textarea ng-model="feedbackComments" class="form-control" type="textarea" name="comments" id="comments" placeholder="Your Comments" maxlength="6000"
                                     rows="5"></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label for="name"> Your Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input ng-model = "feedbackName" type="text" class="form-control" id="name" name="name" required>
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label for="email"> Email:</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input ng-model = "feedbackEmail" type="email" class="form-control" id="email" name="email" required>
                             </div>
                         </div>
                         <div class="row">

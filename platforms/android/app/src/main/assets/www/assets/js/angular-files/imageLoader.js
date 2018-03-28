@@ -476,6 +476,41 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
         }
     };
 
+    $scope.sendFeedback = function(){
+
+        data  = {
+            fullname : $scope.feedbackName,
+            email : $scope.feedbackEmail,
+            message : $scope.feedbackComments,
+            rating : $scope.rating
+        }
+
+        $http.post('http://192.168.0.111:8000/api/chironx/email/feedback', data, config).success(function (res) {
+            console.log(res);
+            
+            if(res.message === "Feedback Successfully submitted,Thanks!"){
+                growl.success(res.message, { title: 'Success' });
+
+                $scope.feedbackName = "";
+                $scope.feedbackEmail = "";
+                $scope.feedbackComments = "";
+                $scope.rating = "";
+            }
+            else{
+                growl.error(res.message, { title: 'Failure' });    
+                
+                $scope.feedbackName = "";
+                $scope.feedbackEmail = "";
+                $scope.feedbackComments = "";
+                $scope.rating = "";    
+            }
+
+        });
+
+       
+
+    }
+
 
 
 }]);

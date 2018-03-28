@@ -17,7 +17,6 @@ mainPhoneGapApp.controller('registrationController', function ($scope, $http) {
             "Registration_Date" : Date.now()
         }
     $http.post('http://192.168.0.111:8000/api/chironx/authenticate/register', registerData).success(function(res){
-
         console.log(res);
 
     })
