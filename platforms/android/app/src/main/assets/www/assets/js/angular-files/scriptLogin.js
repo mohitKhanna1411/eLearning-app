@@ -18,6 +18,7 @@ mainPhoneGapApp.controller('loginController',['$scope','$http','$window','$local
             }
         })
     }
+    
     $scope.forgotPassword = function() {
         console.log("hi");
         var data={"email" : $scope.email};
