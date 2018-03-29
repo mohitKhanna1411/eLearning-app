@@ -48,7 +48,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     // Get random image
     getRandomImage = function () {
         // Get random image
-        $http.get('http://192.168.0.111:8000/api/chironx/assign/random/image', config).success(function (res) {
+        $http.get('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/assign/random/image', config).success(function (res) {
 
             console.log(res);
 
@@ -84,7 +84,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
 
 
     // Get the list of clinical features
-    $http.get('http://192.168.0.111:8000/api/chironx/list/diagnosis', config).success(function (res) {
+    $http.get('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/list/diagnosis', config).success(function (res) {
         // console.log(res.data);
         $scope.listDiagnosis = res.data;
     });
@@ -192,7 +192,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
 
         console.log(data);
 
-        $http.post('http://192.168.0.111:8000/api/chironx/markBad/assign/random/image', data, config).success(function (res) {
+        $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/markBad/assign/random/image', data, config).success(function (res) {
             console.log(res);
 
             if (res.message === "Image Label Updated") {
@@ -270,7 +270,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
 
             console.log(data);
 
-            $http.post('http://192.168.0.111:8000/api/chironx/save/partialResult', data, config).success(function (res) {
+            $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/save/partialResult', data, config).success(function (res) {
                 console.log(res);
 
                 if(res.message === "Stage 3 Updated")
@@ -387,7 +387,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
 
         console.log(data);
 
-        $http.post('http://192.168.0.111:8000/api/chironx/save/allResult', data, config).success(function (res) {
+        $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/save/allResult', data, config).success(function (res) {
             console.log(res);
 
             if (res.message === "All Results Saved") {
@@ -485,7 +485,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
             rating : $scope.rating
         }
 
-        $http.post('http://192.168.0.111:8000/api/chironx/email/feedback', data, config).success(function (res) {
+        $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/email/feedback', data, config).success(function (res) {
             console.log(res);
             
             if(res.message === "Feedback Successfully submitted,Thanks!"){
@@ -513,7 +513,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
         data = {
             image: $scope.imageObject
         }
-        $http.post('http://192.168.0.111:8000/api/chironx/mark/review', data, config).success(function (res) {
+        $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/mark/review', data, config).success(function (res) {
             console.log(res);
 
             if(res.message === "Image Skipped")

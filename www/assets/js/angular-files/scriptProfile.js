@@ -10,7 +10,7 @@ mainPhoneGapApp.controller('profileController', ['$scope', '$http', '$localStora
 
 
     // Get the user profile details
-    $http.get('http://192.168.0.111:8000/api/chironx/get/doctor/details', config).success(function (res) {
+    $http.get('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/get/doctor/details', config).success(function (res) {
         console.log(res);
 
         $scope.docName = res.docs.Doc_Name;

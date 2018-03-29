@@ -15,7 +15,7 @@ mainPhoneGapApp.controller('registrationController',['$scope', '$http', 'growl',
             "isActive" :false ,
             "Registration_Date" : Date.now()
         }
-    $http.post('http://192.168.0.111:8000/api/chironx/authenticate/register', registerData).success(function(res){
+    $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/authenticate/register', registerData).success(function(res){
         console.log(res);
 
         if(res.message === "you are registered successfully")
