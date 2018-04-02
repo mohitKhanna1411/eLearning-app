@@ -190,8 +190,8 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
         }
 
         console.log(data);
-
-        $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/markBad/assign/random/image', data, config).success(function (res) {
+        
+        $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/mark/bad/quality/image', data, config).success(function (res) {
             console.log(res);
 
             if (res.message === "Image Label Updated") {
@@ -548,7 +548,7 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
         data = {
             image: $scope.imageObject
         }
-        $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/mark/review', data, config).success(function (res) {
+        $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/skip/image', data, config).success(function (res) {
             console.log(res);
 
             if(res.message === "Image Skipped")
