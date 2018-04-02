@@ -527,6 +527,13 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
         });
     }
 
+    $scope.logout = function() {
+        $localStorage.token='';
+        console.log("logging out");
+        $window.location.href="index.html";
+
+    }
+
 
 
 }]);

@@ -35,6 +35,7 @@ mainPhoneGapApp.controller('loginController',['$scope','$http','$window','$local
 
     $scope.logout = function() {
         $localStorage.token='';
+        console.log("logging out");
         $window.location.href="index.html";
 
     }
