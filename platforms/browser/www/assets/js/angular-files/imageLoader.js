@@ -7,7 +7,6 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     };
     console.log($localStorage.token);
 
-
     // Imageviewer
     function imageView(image) {
 
@@ -196,7 +195,8 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
             console.log(res);
 
             if (res.message === "Image Label Updated") {
-                getRandomImage();
+                // getRandomImage();
+                $window.location.reload();
             }
             else {
                 growl.error(res.message, { title: 'Failure' });
@@ -319,73 +319,111 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
     $scope.no = [];
     $scope.unclear = [];
 
-    $scope.setValueLevel4 = function (value, state, counter) {
+    // $scope.setValueLevel4 = function (value, state, counter) {
 
-        console.log(counter, "cunt")
+    //     console.log(counter, "cunt")
 
-        if (state === 'Present') {
-            $scope.clinicalFeat.push(value);
-            $scope.yes.push(value);
-        }
-        else if (state === 'Absent') {
-            // $scope.clinicalFeat.push(value);
-            $scope.no.push(value);
-        }
-        else {
-            // $scope.clinicalFeat.push(value);
-            $scope.unclear.push(value);
-        }
+    //     if (state === 'Present') {
+    //         $scope.clinicalFeat.push(value);
+    //         $scope.yes.push(value);
+    //     }
+    //     else if (state === 'Absent') {
+    //         // $scope.clinicalFeat.push(value);
+    //         $scope.no.push(value);
+    //     }
+    //     else {
+    //         // $scope.clinicalFeat.push(value);
+    //         $scope.unclear.push(value);
+    //     }
 
+    //     if (counter) {
+    //         console.log("disabledStage_Feat" + counter.toString())
+    //         // prev and next button enable/disable
+    //         $scope["disabledStage_Feat" + counter.toString()] = true;
+    //         $scope.prevDisabled = false;
+    //     }
+    //     else {
+    //         // prev and next button enable/disable
+    //         $scope.disabledStage_4 = true;
+    //         $scope.prevDisabled = false;
+    //     }
+    //     // Setting prev and next counters
+    //     checkcounter();
+
+    //     data = {
+    //         quality: $scope.quality,
+    //         qualityIssues: $scope.qualityIssuesArr,
+    //         clinicalFeatures: $scope.clinicalFeat,
+    //         yes: $scope.yes,
+    //         no: $scope.no,
+    //         unclear: $scope.unclear
+    //     }
+    //     console.log(data);
+
+    //     if (counter === 16) {
+    //         var DIV = document.getElementById("pevNextDiv");
+    //         DIV.style.display = "none";
+
+    //         var SUBDIV = document.getElementById("submitDiv");
+    //         SUBDIV.style.display = "block";
+    //     }
+
+    // }
+
+    testFun = function (counter) {
+        
         if (counter) {
-            console.log("disabledStage_Feat" + counter.toString())
-            // prev and next button enable/disable
-            $scope["disabledStage_Feat" + counter.toString()] = true;
+            // // console.log("disabledStage_Feat" + counter.toString())
+            // // prev and next button enable/disable
+            // $scope["disabledStage_Feat" + counter.toString()] = true;
+
+            $("#disabledStageP_Feat" + counter.toString()).prop('disabled', true);
+            $("#disabledStageA_Feat" + counter.toString()).prop('disabled', true);
+            $("#disabledStageU_Feat" + counter.toString()).prop('disabled', true);
+
             $scope.prevDisabled = false;
+
+
+           
         }
         else {
             // prev and next button enable/disable
             $scope.disabledStage_4 = true;
             $scope.prevDisabled = false;
         }
-        // Setting prev and next counters
-        checkcounter();
-
-        data = {
-            quality: $scope.quality,
-            qualityIssues: $scope.qualityIssuesArr,
-            clinicalFeatures: $scope.clinicalFeat,
-            yes: $scope.yes,
-            no: $scope.no,
-            unclear: $scope.unclear
-        }
-        console.log(data);
-
-        if (counter === 16) {
-            var DIV = document.getElementById("pevNextDiv");
-            DIV.style.display = "none";
-
-            var SUBDIV = document.getElementById("submitDiv");
-            SUBDIV.style.display = "block";
-        }
-
     }
 
     // Stage 5 Diagnosis
     $scope.stage5SaveAllDetail = function (diagnosisList) {
 
-        // console.log($window.diagnosisList);
-        data = {
-            image: $scope.imageObject,
-            quality: $scope.quality,
-            qualityIssues: $scope.qualityIssuesArr,
-            clinicalFeatures: $scope.clinicalFeat,
-            yes: $scope.yes,
-            no: $scope.no,
-            unclear: $scope.unclear,
-            diagList: $window.diagnosisList
-        }
+        console.log($window.data);
 
-        console.log(data);
+        data = {
+                image: $scope.imageObject,
+                quality: $scope.quality,
+                qualityIssues: $scope.qualityIssuesArr,
+                clinicalFeatures: $window.data.clinicalFeatures,
+                yes: $window.data.yes,
+                no: $window.data.no,
+                unclear: $window.data.unclear,
+                diagList: $window.diagnosisList
+            }
+
+            console.log(data);
+
+
+        // data = {
+        //     image: $scope.imageObject,
+        //     quality: $scope.quality,
+        //     qualityIssues: $scope.qualityIssuesArr,
+        //     clinicalFeatures: $scope.clinicalFeat,
+        //     yes: $scope.yes,
+        //     no: $scope.no,
+        //     unclear: $scope.unclear,
+        //     diagList: $window.diagnosisList
+        // }
+
+        // console.log(data);
 
         $http.post('http://ec2-13-126-237-55.ap-south-1.compute.amazonaws.com:3000/api/chironx/save/allResult', data, config).success(function (res) {
             console.log(res);
@@ -425,9 +463,6 @@ mainPhoneGapApp.controller('imageLoaderController', ['$scope', '$http', '$localS
                 growl.error(res.message, { title: 'Failure' });
             }
         });
-
-
-
 
     }
 
