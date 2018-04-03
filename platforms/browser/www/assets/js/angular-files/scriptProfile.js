@@ -19,5 +19,12 @@ mainPhoneGapApp.controller('profileController', ['$scope', '$http', '$localStora
 
     });
 
+    $scope.logout = function() {
+        $localStorage.token='';
+        console.log("logging out");
+        $window.location.href="index.html";
+
+    }
+
 
 }]);
