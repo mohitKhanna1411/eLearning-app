@@ -66,6 +66,9 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
     }
   },
   "dependent_plugins": {

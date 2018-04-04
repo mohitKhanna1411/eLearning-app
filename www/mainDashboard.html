@@ -197,21 +197,24 @@
 
                                 <!-- Diagnosis List Script Start -->
                                 <script>
+                                    
                                     function myFunction() {
                                         var input, filter, ul, li, a, i;
                                         input = document.getElementById("myInput");
                                         filter = input.value.toUpperCase();
                                         ul = document.getElementById("myUL");
                                         li = ul.getElementsByTagName("li");
+                                        
                                         for (i = 0; i < li.length; i++) {
                                             a = li[i].getElementsByTagName("a")[0];
                                             if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                                // console.log("Hello");
                                                 li[i].style.display = "";
                                             } else {
                                                 li[i].style.display = "none";
-
                                             }
                                         }
+
                                         function getEventTarget(e) {
                                             e = e || window.event;
                                             return e.target || e.srcElement;
@@ -650,7 +653,7 @@
                     
                     if(count === 18)
                     {
-                        appendElement.innerHTML = '<div style="padding: 5px;"><h3 style="margin-top: 0px;margin-bottom: 0px;">Fifth Stage</h3><h5 ng-click="stage5SaveAllDetail()" style="background-color: moccasin; margin-right: 10px;padding-left: 15px;padding-right: 15px;padding-top: 10px;padding-bottom: 10px;margin-top: 10px;margin-bottom: 0px;">Suggested diagnosis</h5><div class="row" style="margin-top: 10px;"><div style="margin-left: 15px;margin-right: 30px;" id="myDIV" class="header"><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"><span onclick="newElement()" id="addBtn">Add</span><ul id="myUL" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 132px;"><div id = "diaglist"></div></ul><ul id="myUL1" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 115px;margin-top: 15px;"></ul></div></div></div>';
+                        appendElement.innerHTML = '<div style="padding: 5px;"><h3 style="margin-top: 0px;margin-bottom: 0px;">Fifth Stage</h3><h5 ng-click="stage5SaveAllDetail()" style="background-color: moccasin; margin-right: 10px;padding-left: 15px;padding-right: 15px;padding-top: 10px;padding-bottom: 10px;margin-top: 10px;margin-bottom: 0px;">Suggested diagnosis</h5><div class="row" style="margin-top: 10px;"><div style="margin-left: 15px;margin-right: 30px;" id="myDIV" class="header"><input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search for names.." title="Type in a name"><span onclick="newElement()" id="addBtn">Add</span><ul id="myUL" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 132px;"><div id = "diaglist"></div></ul><ul id="myUL1" style="overflow: scroll;overflow-x: hidden;height: auto;max-height: 115px;margin-top: 15px;"></ul></div></div></div>';
                     }
                     
                     mySiema.append(appendElement);

@@ -28,7 +28,8 @@
       "cordova-plugin-vibration": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-code-push": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-keyboard": {}
     }
   },
   "dependencies": {
@@ -49,6 +50,7 @@
     "cordova-plugin-geolocation": "~2.1.0",
     "cordova-plugin-globalization": "~1.0.3",
     "cordova-plugin-inappbrowser": "~1.3.0",
+    "cordova-plugin-keyboard": "^1.2.0",
     "cordova-plugin-media": "~2.2.0",
     "cordova-plugin-media-capture": "~1.2.0",
     "cordova-plugin-network-information": "~1.2.0",

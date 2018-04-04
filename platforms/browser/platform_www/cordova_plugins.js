@@ -694,6 +694,14 @@ module.exports = [
         "clobbers": [
             "zip"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
+        "id": "cordova-plugin-keyboard.keyboard",
+        "pluginId": "cordova-plugin-keyboard",
+        "clobbers": [
+            "window.Keyboard"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -722,7 +730,8 @@ module.exports.metadata =
     "cordova-plugin-code-push": "1.11.7",
     "code-push": "2.0.4",
     "cordova-plugin-compat": "1.2.0",
-    "cordova-plugin-zip": "3.1.0"
+    "cordova-plugin-zip": "3.1.0",
+    "cordova-plugin-keyboard": "1.2.0"
 }
 // BOTTOM OF METADATA
 });
