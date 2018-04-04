@@ -36,8 +36,7 @@
 
 
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
-    />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
     <style>
@@ -188,138 +187,137 @@
                     </div>
                 </div>
                 <br>
+
+                 <!-- Diagnosis List Script Start -->
+                 <script>
+                        function myFunction() {
+                            var input, filter, ul, li, a, i;
+                            input = document.getElementById("myInput");
+                            filter = input.value.toUpperCase();
+                            ul = document.getElementById("myUL");
+                            li = ul.getElementsByTagName("li");
+                            
+                            for (i = 0; i < li.length; i++) {
+                                a = li[i].getElementsByTagName("a")[0];
+                                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                    // console.log("Hello");
+                                    li[i].style.display = "";
+                                } else {
+                                    li[i].style.display = "none";
+                                }
+                            }
+
+                            function getEventTarget(e) {
+                                e = e || window.event;
+                                return e.target || e.srcElement;
+                            }
+
+                            var ul = document.getElementById('myUL');
+                            ul.onclick = function (event) {
+                                var target = getEventTarget(event);
+                                input.value = target.innerHTML;
+                            };
+                        }
+
+                        var diagnosisList = [];
+                        var testvar = 'asdasdasdasdasd';
+
+                        // Create a "close" button and append it to each list item
+                        var myNodelist = document.getElementsByClassName("selectedli");
+                        var i;
+                        for (i = 0; i < myNodelist.length; i++) {
+                            var span = document.createElement("SPAN");
+                            var txt = document.createTextNode("\u00D7");
+                            span.className = "closeli";
+                            span.appendChild(txt);
+                            myNodelist[i].appendChild(span);
+                        }
+
+                        // Click on a close button to hide the current list item
+                        var close = document.getElementsByClassName("closeli");
+                        var i;
+                        for (i = 0; i < close.length; i++) {
+                            close[i].onclick = function () {
+                                var div = this.parentElement;
+                                div.style.display = "none";
+                            }
+                        }
+
+                        // // Add a "checked" symbol when clicking on a list item
+                        // var list = document.querySelector('ul');
+                        // list.addEventListener('click', function(ev) {
+                        //   if (ev.target.tagName === 'LI') {
+                        //     ev.target.classList.toggle('checked');
+                        //   }
+                        // }, false);
+
+                        // Create a new list item when clicking on the "Add" button
+                        function newElement() {
+                            var li = document.createElement("li");
+                            li.className = "selectedli";
+                            var inputValue = document.getElementById("myInput").value;
+                            var t = document.createTextNode(inputValue);
+                            li.appendChild(t);
+                            if (inputValue === '') {
+                                alert("You must write something!");
+                            } else {
+                                document.getElementById("myUL1").appendChild(li);
+                                
+                                // Setting diagnosis value
+                                diagnosisList.push(inputValue);
+                                console.log(diagnosisList);
+
+                            }
+                            document.getElementById("myInput").value = "";
+
+                            var span = document.createElement("SPAN");
+                            var txt = document.createTextNode("\u00D7");
+                            span.className = "closeli";
+                            span.appendChild(txt);
+                            li.appendChild(span);
+
+                            // POP removed diagnosis
+                            function remove(arr, what) {
+                                var found = arr.indexOf(what);
+
+                                while (found !== -1) {
+                                    arr.splice(found, 1);
+                                    found = arr.indexOf(what);
+                                }
+                            }
+
+                            for (i = 0; i < close.length; i++) {
+                                
+                                close[i].onclick = function () {
+                                    var div = this.parentElement;
+                                    div.style.display = "none";
+
+                                    var text = div.innerHTML.split('<span');
+                                    var diagName = text[0];
+                                    console.log("Name--- "+diagName);
+
+                                    // var itemToPop = diagnosisList.find(function(str) {
+                                    //     return str == diagName;
+                                    // });
+                                    // console.log("Irem to pop --- "+itemToPop);
+
+                                    // POP removed diagnosis
+                                    remove(diagnosisList,diagName);
+                                    console.log(diagnosisList);
+
+                                }
+                            }
+                        }
+                    </script>
+                    <!-- Diagnosis List Script End -->
+
+
                 <!-- <p>Card View</p>
                 <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"> -->
                 <div class="row" style="padding-right: 5px; padding-left: 5px;margin-bottom: 30px;">
                     <div class="card">
                         <div class="card-image">
                             <div class="siema" id="test" style="height: auto; padding: 5px;">
-
-                                <!-- Diagnosis List Script Start -->
-                                <script>
-                                    
-                                    function myFunction() {
-                                        var input, filter, ul, li, a, i;
-                                        input = document.getElementById("myInput");
-                                        filter = input.value.toUpperCase();
-                                        ul = document.getElementById("myUL");
-                                        li = ul.getElementsByTagName("li");
-                                        
-                                        for (i = 0; i < li.length; i++) {
-                                            a = li[i].getElementsByTagName("a")[0];
-                                            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                                                // console.log("Hello");
-                                                li[i].style.display = "";
-                                            } else {
-                                                li[i].style.display = "none";
-                                            }
-                                        }
-
-                                        function getEventTarget(e) {
-                                            e = e || window.event;
-                                            return e.target || e.srcElement;
-                                        }
-
-                                        var ul = document.getElementById('myUL');
-                                        ul.onclick = function (event) {
-                                            var target = getEventTarget(event);
-                                            input.value = target.innerHTML;
-                                        };
-                                    }
-
-                                    var diagnosisList = [];
-                                    var testvar = 'asdasdasdasdasd';
-
-                                    // Create a "close" button and append it to each list item
-                                    var myNodelist = document.getElementsByClassName("selectedli");
-                                    var i;
-                                    for (i = 0; i < myNodelist.length; i++) {
-                                        var span = document.createElement("SPAN");
-                                        var txt = document.createTextNode("\u00D7");
-                                        span.className = "closeli";
-                                        span.appendChild(txt);
-                                        myNodelist[i].appendChild(span);
-                                    }
-
-                                    // Click on a close button to hide the current list item
-                                    var close = document.getElementsByClassName("closeli");
-                                    var i;
-                                    for (i = 0; i < close.length; i++) {
-                                        close[i].onclick = function () {
-                                            var div = this.parentElement;
-                                            div.style.display = "none";
-                                        }
-                                    }
-
-                                    // // Add a "checked" symbol when clicking on a list item
-                                    // var list = document.querySelector('ul');
-                                    // list.addEventListener('click', function(ev) {
-                                    //   if (ev.target.tagName === 'LI') {
-                                    //     ev.target.classList.toggle('checked');
-                                    //   }
-                                    // }, false);
-
-                                    // Create a new list item when clicking on the "Add" button
-                                    function newElement() {
-                                        var li = document.createElement("li");
-                                        li.className = "selectedli";
-                                        var inputValue = document.getElementById("myInput").value;
-                                        var t = document.createTextNode(inputValue);
-                                        li.appendChild(t);
-                                        if (inputValue === '') {
-                                            alert("You must write something!");
-                                        } else {
-                                            document.getElementById("myUL1").appendChild(li);
-                                            
-                                            // Setting diagnosis value
-                                            diagnosisList.push(inputValue);
-                                            console.log(diagnosisList);
-
-                                        }
-                                        document.getElementById("myInput").value = "";
-
-                                        var span = document.createElement("SPAN");
-                                        var txt = document.createTextNode("\u00D7");
-                                        span.className = "closeli";
-                                        span.appendChild(txt);
-                                        li.appendChild(span);
-
-                                        // POP removed diagnosis
-                                        function remove(arr, what) {
-                                            var found = arr.indexOf(what);
-
-                                            while (found !== -1) {
-                                                arr.splice(found, 1);
-                                                found = arr.indexOf(what);
-                                            }
-                                        }
-
-                                        for (i = 0; i < close.length; i++) {
-                                            
-                                            close[i].onclick = function () {
-                                                var div = this.parentElement;
-                                                div.style.display = "none";
-
-                                                var text = div.innerHTML.split('<span');
-                                                var diagName = text[0];
-                                                console.log("Name--- "+diagName);
-
-                                                // var itemToPop = diagnosisList.find(function(str) {
-                                                //     return str == diagName;
-                                                // });
-                                                // console.log("Irem to pop --- "+itemToPop);
-
-                                                // POP removed diagnosis
-                                                remove(diagnosisList,diagName);
-                                                console.log(diagnosisList);
-
-                                            }
-                                        }
-                                    }
-                                </script>
-                                <!-- Diagnosis List Script End -->
-
-
                                 <div style="padding: 5px;">
                                     <h3 style="margin-top: 5px;margin-bottom: 5px;">
                                         <!-- <u>First Stage</u> -->
