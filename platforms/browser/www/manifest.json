@@ -1,10 +1,10 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "ChironZeta",
-  "short_name": "ChironZeta",
+  "name": "Portal",
+  "short_name": "Portal",
   "version": "ai.chironx.chironzeta",
-  "description": "Hello World sample application that responds to the deviceready event.",
+  "description": "Online Education Portal",
   "author": "PhoneGap Team",
   "icons": [],
   "orientation": "landscape",
