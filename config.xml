@@ -95,7 +95,10 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <engine name="browser" spec="~5.0.3" />
+    <engine name="android" spec="6.4.0" />
     <plugin name="cordova-plugin-battery-status" spec="~1.1.1" />
+    <plugin name="cordova-plugin-camera" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.2" />
     <plugin name="cordova-plugin-contacts" spec="~2.0.1" />
@@ -115,8 +118,5 @@
     <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
     <plugin name="cordova-plugin-code-push" spec="~1.11.7" />
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
-    <plugin name="cordova-plugin-camera" spec="~2.1.1" />
     <plugin name="cordova-plugin-keyboard" spec="^1.2.0" />
-    <engine name="browser" spec="~5.0.3" />
-    <engine name="android" spec="6.4.0" />
 </widget>

@@ -3,7 +3,7 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
-  .when('/dashboardStudent', {
+  .when('/views/dashboardStudent.html', {
     templateUrl : '/views/student/lessonsStudent.html',
     controller  : 'controllerStudent'
   })
@@ -44,8 +44,13 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
         }
     };
     console.log($localStorage.token);
+  
+  $http.get('http://127.0.0.1:8080/jwt/api/student/getInfo',config).success(function(res){
+    $scope.user = res;
+    console.log(res);
+  })
 
-  $http.get('/api/student/getLastLesson').success(function(res){
+  $http.get('http://127.0.0.1:8080/jwt/api/student/getLastLesson',config).success(function(res){
    if(res.last_lesson){
      $scope.lastLessonStudent = res.last_lesson; 
    }
@@ -70,7 +75,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
     
     var data={"class":standard, "subject":subject, "section":section};
     console.log(data);
-    $http.get('/api/student/getlessons', { params: data }).success(function(res){
+    $http.post('http://127.0.0.1:8080/jwt/api/student/getlessons',data, config).success(function(res){
      $scope.list = res;
      if(res === "0"){
       $scope.msg1 = "No lesson found or you are not enrolled in this class!";
@@ -101,7 +106,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
     
     var data={"class":standard, "subject":subject, "section":section};
     console.log(data);
-    $http.get('/api/getAllAssign', { params: data }).success(function(res){
+    $http.get('http://127.0.0.1:8080/jwt/api/student/getAllAssign', { params: data },config).success(function(res){
       $scope.assesments = res;
       console.log(res);
       if(res == "0"){
@@ -130,7 +135,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
     
     var data={"assesment_name" : assess_name};
     console.log(data);
-    $http.get('/api/getAssign', { params: data }).success(function(res){
+    $http.get('http://127.0.0.1:8080/api/getAssign', { params: data }).success(function(res){
       $scope.questions = res.questions;
       $scope.name = res.assesment_name;
       console.log(res);
@@ -150,7 +155,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
     
     var data={"Title" : title_lesson};
     console.log(data);
-    $http.get('/api/student/getSpecificLesson', { params: data }).success(function(res){
+    $http.get('http://127.0.0.1:8080/jwt/api/student/getSpecificLesson', { params: data },config).success(function(res){
       $scope.notok="ok";
       $scope.list5 = res;
       
@@ -172,7 +177,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
     
     var data={"class":standard, "subject":subject, "section":section, "assesment_name" : assess_name};
     console.log(data);
-    $http.get('/api/getRes', { params: data }).success(function(res){
+    $http.get('http://127.0.0.1:8080/jwt/api/getRes', { params: data }, config).success(function(res){
       $scope.list = res;
       console.log(res);
       if(res == "0"){
@@ -215,7 +220,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
         answers[j].selected = "false";
         $scope.remedial_lesson_title="";
         let data={"error_code" : answers[j].error_code};
-        $http.get('/api/getRemedialTitle', { params: data }).success(function(res){
+        $http.get('http://127.0.0.1:8080/api/getRemedialTitle', { params: data }).success(function(res){
           
           $scope.remedial_lesson_title = res.remedial_title;
 
@@ -253,7 +258,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
   }
   $scope.ql = qLength;
   console.log(sendData);
-  $http.post('/api/addResults', sendData).success(function(res){
+  $http.post('http://127.0.0.1:8080/jwt/api/addResults', sendData, config).success(function(res){
     $scope.msg = res;
     $scope.hide = true;
        // $scope.optionsArr = [];
@@ -278,7 +283,7 @@ $scope.remedialLessons= function()
 
   var data={"class":standard, "subject":subject, "section":section};
   console.log(data);
-  $http.get('/api/admin/getremedialLessons', { params: data }).success(function(res){
+  $http.get('http://127.0.0.1:8080/api/admin/getremedialLessons', { params: data }).success(function(res){
     $scope.list = res;
     console.log(res);
     if(res == "0"){
@@ -296,8 +301,4 @@ $scope.remedialLessons= function()
   })
 
 }
-
-
-
-
 });
