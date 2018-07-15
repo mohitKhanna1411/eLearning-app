@@ -3,7 +3,7 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
-  .when('android_asset/www/views/dashboardTeacher.html', {
+  .when('dashboardTeacher.html', {
     templateUrl : 'android_asset/www/views/teacher/manageGradeTeacher.html',
     controller  : 'controllerTeacher'
   })
