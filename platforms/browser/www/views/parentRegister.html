@@ -18,17 +18,17 @@
 
      $scope.parentRegister = function() {
         console.log($scope.parentRegisterData + "hiiiiiiiiiiiiiiiii");
-    $http.post('http://127.0.0.1:8080/jwt/parentLogin', $scope.parentRegisterData).success(function(res){
+    $http.post('http://13.232.160.185:8080/app/parentRegister', $scope.parentRegisterData).success(function(res){
         console.log(res);
 
-        // if(res.message === "you are registered successfully")
-        // {
-        //     $window.location.href = "index.html";
-        // }
-        // else
-        // {
-        //     growl.error(res.message, { title: 'Failure' });
-        // }
+        if(res.message === "you are registered successfully")
+        {
+            $window.location.href = "index.html";
+        }
+        else
+        {
+            growl.error(res.message, { title: 'Failure' });
+        }
 
     })
     }

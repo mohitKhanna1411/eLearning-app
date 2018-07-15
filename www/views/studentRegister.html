@@ -25,7 +25,7 @@
 
                 $scope.studentRegister = function() {
                     console.log($scope.studentRegisterData);
-    $http.post('someURL', $scope.studentRegisterData).success(function(res){
+    $http.post('http://13.232.160.185:8080/app/studentRegister', $scope.studentRegisterData).success(function(res){
         console.log(res);
 
         if(res.message === "you are registered successfully")

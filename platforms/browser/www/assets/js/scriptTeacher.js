@@ -112,7 +112,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
     
     var data={"Title" : title_lesson};
     console.log(data);
-    $http.get('http://127.0.0.1:8080/jwt/api/teacher/getSpecificLesson', { params: data }, config).success(function(res){
+    $http.post('http://127.0.0.1:8080/jwt/api/teacher/getSpecificLesson',data, config).success(function(res){
       $scope.notok="ok";
       $scope.list5 = res;
       

@@ -106,7 +106,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
     
     var data={"class":standard, "subject":subject, "section":section};
     console.log(data);
-    $http.get('http://127.0.0.1:8080/jwt/api/student/getAllAssign', { params: data },config).success(function(res){
+    $http.post('http://127.0.0.1:8080/jwt/api/student/getAllAssign', data ,config).success(function(res){
       $scope.assesments = res;
       console.log(res);
       if(res == "0"){
@@ -155,7 +155,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
     
     var data={"Title" : title_lesson};
     console.log(data);
-    $http.get('http://127.0.0.1:8080/jwt/api/student/getSpecificLesson', { params: data },config).success(function(res){
+    $http.post('http://127.0.0.1:8080/jwt/api/student/getSpecificLesson',data ,config).success(function(res){
       $scope.notok="ok";
       $scope.list5 = res;
       
@@ -177,7 +177,7 @@ myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$l
     
     var data={"class":standard, "subject":subject, "section":section, "assesment_name" : assess_name};
     console.log(data);
-    $http.get('http://127.0.0.1:8080/jwt/api/getRes', { params: data }, config).success(function(res){
+    $http.post('http://127.0.0.1:8080/jwt/api/getRes',data, config).success(function(res){
       $scope.list = res;
       console.log(res);
       if(res == "0"){

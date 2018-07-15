@@ -15,7 +15,7 @@
 
                 $scope.teacherRegister = function() {
                     console.log($scope.teacherRegisterData);
-    $http.post('someURL', $scope.teacherRegisterData).success(function(res){
+    $http.post('http://13.232.160.185:8080/app/teacherRegister', $scope.teacherRegisterData).success(function(res){
         console.log(res);
 
         if(res.message === "you are registered successfully")
@@ -59,7 +59,7 @@
                             <label for="username" class="col-md-4 control-label">Username</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control border-input" ng-model="teacherRegisterData.teacherRegisterData.username" required="" autofocus>
+                                <input type="text" class="form-control border-input" ng-model="teacherRegisterData.username" required="" autofocus>
                             </div>
                         </div>
                     </div>
