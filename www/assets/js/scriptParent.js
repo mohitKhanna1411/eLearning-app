@@ -1,5 +1,5 @@
 // creating the module
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
@@ -19,7 +19,7 @@ myApp.config(function($routeProvider, $locationProvider){
 });
 
 // creating mainController
-myApp.controller('controllerParent', function($scope, $http) {
+myApp.controller('controllerParent', function($scope, $http,$window,$localStorage) {
 
   
   $http.get('/api/getReport').success(function(res){
