@@ -30,8 +30,8 @@ myApp.config(function($routeProvider, $locationProvider){
   .when('/teacherRecommend', {
     templateUrl : 'android_asset/www/views/teacher/teacherRecommend.html',
     controller  : 'controllerTeacher'
-  });
-      .when('/logout', {
+  })
+  .when('/logout', {
     templateUrl : 'android_asset/www/views/login.html',
     controller  : 'controllerTeacher'
   });

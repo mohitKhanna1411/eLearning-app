@@ -14,8 +14,8 @@ myApp.config(function($routeProvider, $locationProvider){
   .when('/recommendationParent', {
     templateUrl : 'android_asset/www/views/parent/recommendationParent.html',
     controller  : 'controllerParent'
-  });
-    .when('/logout', {
+  })
+  .when('/logout', {
     templateUrl : 'android_asset/www/views/login.html',
     controller  : 'controllerParent'
   });  $locationProvider.html5Mode(true);
