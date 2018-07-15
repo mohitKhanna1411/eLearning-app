@@ -3,10 +3,6 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
-  .when('views/dashboardTeacher.html', {
-    templateUrl : 'android_asset/www/views/parent/reportParent.html',
-    controller  : 'controllerParent'
-  })
   .when('/reportParent', {
     templateUrl : 'android_asset/www/views/parent/reportParent.html',
     controller  : 'controllerParent'
@@ -14,11 +10,8 @@ myApp.config(function($routeProvider, $locationProvider){
   .when('/recommendationParent', {
     templateUrl : 'android_asset/www/views/parent/recommendationParent.html',
     controller  : 'controllerParent'
-  })
-  .when('/logout', {
-    templateUrl : 'android_asset/www/views/login.html',
-    controller  : 'controllerParent'
-  });  $locationProvider.html5Mode(true);
+  });
+   $locationProvider.html5Mode(true);
 });
 
 // creating mainController
