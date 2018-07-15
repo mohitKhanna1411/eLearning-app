@@ -3,7 +3,7 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
-  .when('/dashboardTeacher', {
+  .when('android_asset/www/views/dashboardTeacher.html', {
     templateUrl : 'android_asset/www/views/teacher/manageGradeTeacher.html',
     controller  : 'controllerTeacher'
   })
@@ -31,10 +31,6 @@ myApp.config(function($routeProvider, $locationProvider){
     templateUrl : 'android_asset/www/views/teacher/teacherRecommend.html',
     controller  : 'controllerTeacher'
   })
-  .when('/logout', {
-    templateUrl : 'android_asset/www/views/login.html',
-    controller  : 'controllerTeacher'
-  });
   $locationProvider.html5Mode(true);
 });
 
