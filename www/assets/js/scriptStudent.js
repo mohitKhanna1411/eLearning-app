@@ -23,6 +23,10 @@ myApp.config(function($routeProvider, $locationProvider){
     templateUrl : 'android_asset/www/views/student/recommendationStudent.html',
     controller  : 'controllerStudent'
   });
+    .when('/logout', {
+    templateUrl : 'android_asset/www/views/login.html',
+    controller  : 'controllerStudent'
+  });
   $locationProvider.html5Mode(true);
 });
 

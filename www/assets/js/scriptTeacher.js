@@ -3,7 +3,7 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
-  .when('/views/dashboardTeacher.html', {
+  .when('/dashboardTeacher', {
     templateUrl : 'android_asset/www/views/teacher/manageGradeTeacher.html',
     controller  : 'controllerTeacher'
   })
@@ -31,6 +31,10 @@ myApp.config(function($routeProvider, $locationProvider){
     templateUrl : 'android_asset/www/views/teacher/teacherRecommend.html',
     controller  : 'controllerTeacher'
   });
+      .when('/logout', {
+    templateUrl : 'android_asset/www/views/login.html',
+    controller  : 'controllerTeacher'
+  });
   $locationProvider.html5Mode(true);
 });
 
@@ -52,22 +56,22 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
     };
     console.log($localStorage.token);
 
-  $http.get('http://127.0.0.1:8080/jwt/api/teacher/getInfo',config).success(function(res){
+  $http.get('http://13.232.160.185:8080/jwt/api/teacher/getInfo',config).success(function(res){
     $scope.user = res;
     console.log(res);
   })
 
-    $http.get('http://127.0.0.1:8080/api/listStudentIDs').success(function(res){
+    $http.get('http://13.232.160.185:8080/api/listStudentIDs').success(function(res){
     $scope.options = res;
     console.log($scope.options);
   })
 
-  $http.get('http://127.0.0.1:8080/api/getClasses').success(function(res){
+  $http.get('http://13.232.160.185:8080/api/getClasses').success(function(res){
     $scope.list4 = res;
     console.log(res);
   })
 
-  $http.get('http://127.0.0.1:8080/jwt/api/teacher/getLastLesson',config).success(function(res){
+  $http.get('http://13.232.160.185:8080/jwt/api/teacher/getLastLesson',config).success(function(res){
    
     if(res.last_lesson){
      $scope.lastLessonTeacher = res.last_lesson; 
@@ -90,7 +94,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
     var subject=$scope.subject;
     var data={"class":standard, "section":section, "subject":subject};
     console.log("data "+data);
-    $http.post('http://127.0.0.1:8080/api/teacher/manageGrade', data).success(function(res){
+    $http.post('http://13.232.160.185:8080/api/teacher/manageGrade', data).success(function(res){
       $scope.msg = res;
       $scope.standard = "";
       $scope.section ="";
