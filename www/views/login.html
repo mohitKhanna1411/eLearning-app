@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <title>Login</title>
        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-        <script type="text/javascript" src="./assets/js/angular-growl.min.js"></script>
-        <script type="text/javascript" src="./assets/js/ngStorage.js"></script>
+        <script type="text/javascript" src="../assets/js/angular-growl.min.js"></script>
+        <script type="text/javascript" src="../assets/js/ngStorage.js"></script>
 
-      <link rel="stylesheet" href="./assets/css/angular-growl.min.css">
+      <link rel="stylesheet" href="../assets/css/angular-growl.min.css">
         <script>
             var app = angular.module('myApp', ['angular-growl','ngStorage']);
             app.controller('log', function($scope, $http,growl,$window,$localStorage) {
@@ -76,13 +76,13 @@
             });
         </script>
         <!-- Bootstrap core CSS     -->
-        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!-- Animation library for notifications   -->
-        <link href="./assets/css/animate.min.css" rel="stylesheet"/>
+        <link href="../assets/css/animate.min.css" rel="stylesheet"/>
 
         <!--  Paper Dashboard core CSS    -->
-        <link href="./assets/css/paper-dashboard.css" rel="stylesheet"/>
+        <link href="../assets/css/paper-dashboard.css" rel="stylesheet"/>
     </head>
     <body ng-app="myApp" ng-controller="log">
 <div growl></div>
