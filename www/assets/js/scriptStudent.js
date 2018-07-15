@@ -38,6 +38,12 @@ myApp.filter('trusted', ['$sce', function ($sce) {
 // creating mainController
 myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$localStorage) {
 
+    var config = {
+        headers: {
+            "Authorization": "Bearer " + $localStorage.token
+        }
+    };
+    console.log($localStorage.token);
 
   $http.get('/api/student/getLastLesson').success(function(res){
    if(res.last_lesson){

@@ -1,5 +1,5 @@
 // creating the module
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
@@ -36,8 +36,14 @@ myApp.filter('trusted', ['$sce', function ($sce) {
 
 
 // creating mainController
-myApp.controller('controllerStudent', function($scope, $http,$timeout) {
+myApp.controller('controllerStudent', function($scope, $http,$timeout,$window,$localStorage) {
 
+    var config = {
+        headers: {
+            "Authorization": "Bearer " + $localStorage.token
+        }
+    };
+    console.log($localStorage.token);
 
   $http.get('/api/student/getLastLesson').success(function(res){
    if(res.last_lesson){

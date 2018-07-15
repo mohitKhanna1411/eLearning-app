@@ -19,7 +19,7 @@
                        if($scope.loginData.role == "teacher"){
                             $http.post('http://127.0.0.1:8080/jwt/teacherLogin', $scope.loginData).success(function(res){
             console.log(res);
-            if(res.message === "you are registered successfully")
+            if(res.message === "You are logged in successfully")
             {
                                growl.success(res.message, {title: 'Success!'});
                     $localStorage.token=res.token;
@@ -35,7 +35,7 @@
             if($scope.loginData.role == "student"){
                     $http.post('http://127.0.0.1:8080/jwt/studentLogin', $scope.loginData).success(function(res){
             console.log(res);
-            if(res.message === "you are registered successfully")
+            if(res.message === "You are logged in successfully")
             {
              
                                growl.success(res.message, {title: 'Success!'});
@@ -44,6 +44,7 @@
             }
             else
             {
+                console.log("here");
                 growl.error(res.message, { title: 'Failure' });
             }
 
@@ -52,7 +53,7 @@
             if($scope.loginData.role == "parent"){
                     $http.post('http://127.0.0.1:8080/jwt/parentLogin', $scope.loginData).success(function(res){
             console.log(res);
-            if(res.message === "you are registered successfully")
+            if(res.message === "You are logged in successfully")
             {
 
                                growl.success(res.message, {title: 'Success!'});
@@ -84,7 +85,7 @@
         <link href="../assets/css/paper-dashboard.css" rel="stylesheet"/>
     </head>
     <body ng-app="myApp" ng-controller="log">
-
+<div growl></div>
 
         <div class="container" style ="margin-top: 3cm;">
             <div class="col-md-8 col-md-offset-2">

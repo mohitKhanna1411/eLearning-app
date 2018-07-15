@@ -1,5 +1,5 @@
 // creating the module
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
@@ -19,9 +19,15 @@ myApp.config(function($routeProvider, $locationProvider){
 });
 
 // creating mainController
-myApp.controller('controllerParent', function($scope, $http) {
+myApp.controller('controllerParent', function($scope, $http,$window,$localStorage) {
 
-  
+      var config = {
+        headers: {
+            "Authorization": "Bearer " + $localStorage.token
+        }
+    };
+    console.log($localStorage.token);
+
   $http.get('/api/getReport').success(function(res){
     $scope.reports = res;
     console.log($scope.reports);

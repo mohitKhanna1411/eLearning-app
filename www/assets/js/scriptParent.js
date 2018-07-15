@@ -21,7 +21,13 @@ myApp.config(function($routeProvider, $locationProvider){
 // creating mainController
 myApp.controller('controllerParent', function($scope, $http,$window,$localStorage) {
 
-  
+      var config = {
+        headers: {
+            "Authorization": "Bearer " + $localStorage.token
+        }
+    };
+    console.log($localStorage.token);
+
   $http.get('/api/getReport').success(function(res){
     $scope.reports = res;
     console.log($scope.reports);

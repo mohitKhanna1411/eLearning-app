@@ -46,6 +46,13 @@ myApp.filter('trusted', ['$sce', function ($sce) {
 // creating mainController
 myApp.controller('controllerTeacher', function($scope, $http,$window,$localStorage) {
 
+    var config = {
+        headers: {
+            "Authorization": "Bearer " + $localStorage.token
+        }
+    };
+    console.log($localStorage.token);
+
   $http.get('/api/listStudentIDs').success(function(res){
     $scope.options = res;
     console.log($scope.options);
