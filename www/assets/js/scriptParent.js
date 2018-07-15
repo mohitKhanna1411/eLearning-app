@@ -8,11 +8,11 @@ myApp.config(function($routeProvider, $locationProvider){
   //   controller  : 'controllerParent'
   // })
   .when('/reportParent', {
-    templateUrl : '/views/parent/reportParent.html',
+    templateUrl : 'android_asset/www/views/parent/reportParent.html',
     controller  : 'controllerParent'
   })
   .when('/recommendationParent', {
-    templateUrl : '/views/parent/recommendationParent.html',
+    templateUrl : 'android_asset/www/views/parent/recommendationParent.html',
     controller  : 'controllerParent'
   });
   $locationProvider.html5Mode(true);
