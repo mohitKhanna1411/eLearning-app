@@ -9,7 +9,71 @@
   "installed_plugins": {
     "cordova-plugin-battery-status": {
       "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-device-orientation": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "ai.chironx.chironzeta"
+    }
+  }
 }

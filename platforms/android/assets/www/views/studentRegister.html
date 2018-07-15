@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="../assets/js/angular-growl.min.js"></script>
+
+  <link rel="stylesheet" href="../assets/css/angular-growl.min.css">
+    <script>
+        var app = angular.module('myApp', ['angular-growl']);
+        app.controller('stu', function($scope, $http) {
+            console.log("controllerStudent");
+            $scope.studentRegisterData ={};
+            $http.get('/api/listTeacherIDs').success(function(res){
+              $scope.optionsTeacher = res;
+      // console.log($scope.options);
+  })
+
+            $http.get('/api/listParentIDs').success(function(res){
+              $scope.optionsParent = res;
+      // console.log($scope.options);
+  })
+
+
+                $scope.studentRegister = function() {
+                    console.log($scope.studentRegisterData);
+    $http.post('someURL', $scope.studentRegisterData).success(function(res){
+        console.log(res);
+
+        if(res.message === "you are registered successfully")
+        {
+            $window.location.href = "index.html";
+        }
+        else
+        {
+            growl.error(res.message, { title: 'Failure' });
+        }
+
+    })
+    }
+
+        });
+    </script>
+
+    <!-- Bootstrap core CSS     -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="../assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="../assets/css/paper-dashboard.css" rel="stylesheet"/>
+</head>
+<body ng-app="myApp" ng-controller="stu">
+    <div growl></div>
+
+    <div class="container" style ="margin-top: 3cm;" >
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Student Register Here</h3></div>
+
+                <div class="panel-body">
+                    <form ng-submit="studentRegister()">
+                       <div class="row">
+
+                        <div class="form-group">
+                            <label for="username" class="col-md-4 control-label">Username</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border-input" ng-model="studentRegisterData.username" required="" autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </br>
+                <div class="row">
+
+                    <div class="form-group">
+                        <label for="password" class="col-md-4 control-label">Password</label>
+
+                        <div class="col-md-6">
+                            <input type="password" class="form-control border-input" ng-model="studentRegisterData.password" required="">
+                        </div>
+                    </div>
+                </div>
+                
+            </br> 
+
+
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="email" class="col-md-4 control-label">Email</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control border-input" ng-model="studentRegisterData.email" required="" autofocus>
+                    </div>
+                </div>
+            </div>
+        </br>
+
+
+
+
+        
+        <div class="row">
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Select Teacher ID</label>
+
+                <div class="col-md-6">
+                    <select class="form-control border-input" ng-model="studentRegisterData.teacherID" ng-options="o.teacher_id as o.teacher_id for o in optionsTeacher" required="">
+                        <option value="">Make a selection</option>
+                        
+                    </select>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </br>
+
+    <div class="row">
+
+        <div class="form-group">
+            <label class="col-md-4 control-label">Select Parent ID</label>
+
+            <div class="col-md-6">
+                <select class="form-control border-input" ng-model="studentRegisterData.parentID" ng-options="o.parent_id as o.parent_id for o in optionsParent" required="">
+                    <option value="">Make a selection</option>
+
+                </select>
+                
+                
+            </div>
+        </div>
+    </div>
+    
+</br>
+
+
+
+
+<div class="row">
+
+    <div class="form-group">
+        <label for="grade" class="col-md-4 control-label">Contact</label>
+
+        <div class="col-md-6">
+            <input type="text" class="form-control border-input" ng-model="studentRegisterData.contact" required="" autofocus>
+        </div>
+    </div>
+</div>
+</br>
+
+
+<div class="row">
+
+    <div class="form-group">
+        <label for="aadhar" class="col-md-4 control-label">Aadhar</label>
+
+        <div class="col-md-6">
+            <input type="text" class="form-control border-input" ng-model="studentRegisterData.aadhar" required="" autofocus>
+        </div>
+    </div>
+</div>
+</br>
+<div class="row">
+ <div class="form-group">
+    <label for="address" class="col-md-4 control-label">Address</label>
+
+    <div class="col-md-6">
+        <input type="textarea" class="form-control border-input" ng-model="studentRegisterData.address" required="" autofocus>
+    </div>
+</div>
+</div>
+</br>
+<div class="row">
+
+    <div class="form-group">
+        <label for="school" class="col-md-4 control-label">School</label>
+
+        <div class="col-md-6">
+            <input type="text" class="form-control border-input" ng-model="studentRegisterData.school" required="" autofocus>
+        </div>
+    </div>
+</div>
+</br>
+   <!--  <div class="row">
+
+                        <div class="form-group">
+                            <label for="grade" class="col-md-4 control-label">Grade</label>
+
+                            <div class="col-md-6">
+                                <select name="grade" class="form-control border-input" required="">
+              <option value="1">Class 1</option>
+              <option value="2">Class 2</option>
+              <option value="3">Class 3</option>
+              <option value="4">Class 4</option>
+               <option value="5">Class 5</option>
+              <option value="6">Class 6</option>
+              <option value="7">Class 7</option>
+              <option value="8">Class 8</option>
+            <option value="9">Class 9</option>
+              <option value="10">Class 10</option>
+            </select>
+                            </div>
+                        </div>
+                    </div>
+                </br>
+
+
+      <div class="row">
+
+                        <div class="form-group">
+                            <label for="subject" class="col-md-4 control-label">Favourite Subject</label>
+
+                            <div class="col-md-6">
+                                <select name="fav_subject" class="form-control border-input" required="">
+			  <option value="maths">Maths</option>
+			  <option value="science">Science</option>
+			  <option value="english">English</option></select>
+                            </div>
+                        </div>
+                    </div> 
+                </br> -->
+
+
+
+
+                <div class="row">
+                 
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-wd btn-fill btn-success">
+                                Register
+                            </button>
+
+                            <a class="btn btn-wd btn-fill btn-info" href="/views/login.html">
+                                Already registered?
+                            </a>
+                            <a class="btn btn-wd btn-fill btn-info" href="../">
+                                Exit
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
