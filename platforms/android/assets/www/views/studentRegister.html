@@ -12,14 +12,14 @@
         app.controller('stu', function($scope, $http,growl,$window) {
             console.log("controllerStudent");
             $scope.studentRegisterData ={};
-            // $http.get('http://13.232.160.185:8080/api/listTeacherIDs').success(function(res){
-            $http.get('http://127.0.0.1:8080/api/listTeacherIDs').success(function(res){
+            $http.get('http://13.232.160.185:8080/api/listTeacherIDs').success(function(res){
+            // $http.get('http://127.0.0.1:8080/api/listTeacherIDs').success(function(res){
               $scope.optionsTeacher = res;
       // console.log($scope.options);
   })
 
-            // $http.get('http://13.232.160.185:8080/api/listParentIDs').success(function(res){
-            $http.get('http://127.0.0.1:8080/api/listParentIDs').success(function(res){
+            $http.get('http://13.232.160.185:8080/api/listParentIDs').success(function(res){
+            // $http.get('http://127.0.0.1:8080/api/listParentIDs').success(function(res){
               $scope.optionsParent = res;
       // console.log($scope.options);
   })
@@ -27,8 +27,8 @@
 
                 $scope.studentRegister = function() {
                     console.log($scope.studentRegisterData);
-    // $http.post('http://13.232.160.185:8080/app/studentRegister', $scope.studentRegisterData).success(function(res){
-    $http.post('http://127.0.0.1:8080/app/studentRegister', $scope.studentRegisterData).success(function(res){
+    $http.post('http://13.232.160.185:8080/app/studentRegister', $scope.studentRegisterData).success(function(res){
+    // $http.post('http://127.0.0.1:8080/app/studentRegister', $scope.studentRegisterData).success(function(res){
         console.log(res);
 
         if(res.message === "you are registered successfully")
@@ -96,7 +96,7 @@
                     <label for="email" class="col-md-4 control-label">Email</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control border-input" ng-model="studentRegisterData.email" required="" autofocus>
+                        <input type="email" class="form-control border-input" ng-model="studentRegisterData.email" required="" autofocus>
                     </div>
                 </div>
             </div>

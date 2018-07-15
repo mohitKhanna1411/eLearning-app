@@ -15,8 +15,8 @@
 
                 $scope.teacherRegister = function() {
                     console.log($scope.teacherRegisterData);
-    // $http.post('http://13.232.160.185:8080/app/teacherRegister', $scope.teacherRegisterData).success(function(res){
-    $http.post('http://127.0.0.1:8080/app/teacherRegister', $scope.teacherRegisterData).success(function(res){
+    $http.post('http://13.232.160.185:8080/app/teacherRegister', $scope.teacherRegisterData).success(function(res){
+    // $http.post('http://127.0.0.1:8080/app/teacherRegister', $scope.teacherRegisterData).success(function(res){
         console.log(res);
 
         if(res.message === "you are registered successfully")
