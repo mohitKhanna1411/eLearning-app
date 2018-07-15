@@ -3,7 +3,7 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
-  .when('/dashboardParent', {
+  .when('/views/dashboardParent.html', {
     templateUrl : '/views/parent/reportParent.html',
     controller  : 'controllerParent'
   })
@@ -27,8 +27,12 @@ myApp.controller('controllerParent', function($scope, $http,$window,$localStorag
         }
     };
     console.log($localStorage.token);
+  $http.get('http://127.0.0.1:8080/jwt/api/parent/getInfo',config).success(function(res){
+    $scope.user = res;
+    console.log(res);
+  })
 
-  $http.get('/api/getReport').success(function(res){
+  $http.get('http://127.0.0.1:8080/jwt/api/getReport', config).success(function(res){
     $scope.reports = res;
     console.log($scope.reports);
     if(res.length === 0){
@@ -49,7 +53,7 @@ var subject=$scope.subject;
 var data={"class":standard, "subject":subject, "section":section, "assesment_name" : myselect};
 console.log(data);
 
-$http.get('/api/parent/getRecomm',{ params: data }).success(function(res){
+$http.get('http://127.0.0.1:8080/jwt/api/parent/getRecomm',{ params: data },config).success(function(res){
   $scope.recommendations = res;
   if(res.length === 0){
     $scope.msg2 = "Student has not taken his/her assesment or is not enrolled in this class!";
@@ -71,7 +75,7 @@ $scope.getAllAssign= function()
   
   var data={"class":standard, "subject":subject, "section":section};
   console.log(data);
-  $http.get('/api/getAllAssign', { params: data }).success(function(res){
+  $http.get('http://127.0.0.1:8080/jwt/api/parent/getAllAssign', { params: data },config).success(function(res){
     $scope.assesments = res;
     console.log(res);
     if(res == "0"){

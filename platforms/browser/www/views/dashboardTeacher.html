@@ -19,15 +19,9 @@
     <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Animation library for notifications   -->
-    <link href="../assets/css/animate.min.css" rel="stylesheet"/>
-
     <!--  Paper Dashboard core CSS    -->
     <link href="../assets/css/paper-dashboard.css" rel="stylesheet"/>
 
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="../assets/css/demo.css" rel="stylesheet" />
 
 
     <!--  Fonts and icons     -->
@@ -101,8 +95,8 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand"> Welcome <%= user.username %> ( ID : <%= user.teacher_id %> )</a>
-                            <a class="navbar-brand" href="/dashboardTeacher" target="_self">
+                    <a class="navbar-brand"> Welcome {{user.username}} ( ID : {{user.teacher_id}})</a>
+                            <a class="navbar-brand" href="/views.dashboardTeacher.html" target="_self">
                                 <i class="fa fa-refresh" aria-hidden="true"></i>
                             </a>
                 </div>
@@ -110,7 +104,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         
                         <li>
-                            <a href="/logout" target="_self">
+                            <a href="/" target="_self">
                                 <i class="fa fa-power-off" aria-hidden="true"></i>
 
                                 <p>Logout</p>
