@@ -27,12 +27,12 @@ myApp.controller('controllerParent', function($scope, $http,$window,$localStorag
         }
     };
     console.log($localStorage.token);
-  $http.get('http://127.0.0.1:8080/jwt/api/parent/getInfo',config).success(function(res){
+  $http.get('http://13.232.160.185:8080/jwt/api/parent/getInfo',config).success(function(res){
     $scope.user = res;
     console.log(res);
   })
 
-  $http.get('http://127.0.0.1:8080/jwt/api/getReport', config).success(function(res){
+  $http.get('http://13.232.160.185:8080/jwt/api/getReport', config).success(function(res){
     $scope.reports = res;
     console.log($scope.reports);
     if(res.length === 0){
@@ -53,7 +53,7 @@ var subject=$scope.subject;
 var data={"class":standard, "subject":subject, "section":section, "assesment_name" : myselect};
 console.log(data);
 
-$http.post('http://127.0.0.1:8080/jwt/api/parent/getRecomm',data,config).success(function(res){
+$http.post('http://13.232.160.185:8080/jwt/api/parent/getRecomm',data,config).success(function(res){
   $scope.recommendations = res;
   if(res.length === 0){
     $scope.msg2 = "Student has not taken his/her assesment or is not enrolled in this class!";
@@ -75,7 +75,7 @@ $scope.getAllAssign= function()
   
   var data={"class":standard, "subject":subject, "section":section};
   console.log(data);
-  $http.post('http://127.0.0.1:8080/jwt/api/parent/getAllAssign', data ,config).success(function(res){
+  $http.post('http://13.232.160.185:8080/jwt/api/parent/getAllAssign', data ,config).success(function(res){
     $scope.assesments = res;
     console.log(res);
     if(res == "0"){
