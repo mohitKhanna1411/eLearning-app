@@ -11,7 +11,7 @@
         var app = angular.module('myApp', ['angular-growl']);
         app.controller('par', function($scope, $http) {
             $scope.parentRegisterData = {};
-            $http.get('http://127.0.0.1:8080/api/listStudentIDs').success(function(res){
+            $http.get('http://13.232.160.185:8080/api/listStudentIDs').success(function(res){
               $scope.options = res;
               console.log($scope.options);
           })

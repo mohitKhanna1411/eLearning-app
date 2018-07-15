@@ -112,7 +112,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
     
     var data={"Title" : title_lesson};
     console.log(data);
-    $http.post('http://127.0.0.1:8080/jwt/api/teacher/getSpecificLesson',data, config).success(function(res){
+    $http.post('http://13.232.160.185:8080/jwt/api/teacher/getSpecificLesson',data, config).success(function(res){
       $scope.notok="ok";
       $scope.list5 = res;
       
@@ -137,7 +137,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
     
     var data={"class":standard, "subject":subject, "section":section};
     console.log(data);
-    $http.get('http://127.0.0.1:8080/api/teacher/getlessons', { params: data }).success(function(res){
+    $http.get('http://13.232.160.185:8080/api/teacher/getlessons', { params: data }).success(function(res){
       $scope.list1 = res;
       if(res === "0"){
       $scope.msg1 = "No lesson found!";
@@ -188,7 +188,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
 
         var sendData={"question": data.question, "class": $scope.standard, "subject": $scope.subject, "section": $scope.section , "options": $scope.contents , "lesson_id": data.lesson_id};
         console.log(sendData);
-        $http.post('http://127.0.0.1:8080/api/teacher/addQues', sendData).success(function(res){
+        $http.post('http://13.232.160.185:8080/api/teacher/addQues', sendData).success(function(res){
           $scope.msg = res;
           $scope.optionsArr = [];
           $scope.contents = [];
@@ -209,7 +209,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
         var studentID=$scope.studentID;
         var data={"class":standard, "subject":subject, "section":section, "student":studentID};
         console.log(data);
-        $http.post('http://127.0.0.1:8080/api/teacher/addStudent', data).success(function(res){
+        $http.post('http://13.232.160.185:8080/api/teacher/addStudent', data).success(function(res){
           $scope.msg1 = res;
           $scope.studentID = "";
         })
@@ -227,7 +227,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
         var studentID=$scope.studentID;
         var data={"class":standard, "subject":subject, "section":section, "student":studentID};
         console.log(data);
-        $http.post('http://127.0.0.1:8080/api/teacher/deleteStudent', data).success(function(res){
+        $http.post('http://13.232.160.185:8080/api/teacher/deleteStudent', data).success(function(res){
           $scope.msg1 = res;
           
           $scope.studentID = "";
@@ -250,7 +250,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
         
         var data={"class":standard, "subject":subject, "section":section,"student_id":studentID};
         console.log("data   " +data);
-        $http.get('http://127.0.0.1:8080/api/teacher/getRes', { params: data }).success(function(res){
+        $http.get('http://13.232.160.185:8080/api/teacher/getRes', { params: data }).success(function(res){
     //$scope.recommend=res;
     console.log(res);
     if(res == "0"){
@@ -277,7 +277,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
         
         var data={"class":standard, "subject":subject, "section":section};
         console.log(data);
-        $http.get('http://127.0.0.1:8080/api/getClassStudents', { params: data }).success(function(res){
+        $http.get('http://13.232.160.185:8080/api/getClassStudents', { params: data }).success(function(res){
          
          console.log($scope.list2);
          if(res.length === 0 || res === '0'){
@@ -308,7 +308,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
         
         var data={"class":standard, "subject":subject, "section":section};
         console.log(data);
-        $http.get('http://127.0.0.1:8080/api/getOverallRecommend', { params: data }).success(function(res){
+        $http.get('http://13.232.160.185:8080/api/getOverallRecommend', { params: data }).success(function(res){
           $scope.summary = res;
           
           if(res == "0"){
@@ -385,7 +385,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
         
         var data={"class":standard, "subject":subject, "section":section, student :studentID };
         console.log(data);
-        $http.get('http://127.0.0.1:8080/api/teacher/getAllAssign', { params: data }).success(function(res){
+        $http.get('http://13.232.160.185:8080/api/teacher/getAllAssign', { params: data }).success(function(res){
           $scope.assesments = res;
           console.log(res);
           if(res == "0"){
@@ -415,7 +415,7 @@ myApp.controller('controllerTeacher', function($scope, $http,$window,$localStora
         
         var data={"class":standard, "subject":subject, "section":section, "assesment_name" : assess_name,"student":studentID};
         console.log(data);
-        $http.get('http://127.0.0.1:8080/api/teacher/getRes', { params: data }).success(function(res){
+        $http.get('http://13.232.160.185:8080/api/teacher/getRes', { params: data }).success(function(res){
           $scope.recommend = res;
           console.log(res);
           if(res == "0"){

@@ -12,12 +12,12 @@
         app.controller('stu', function($scope, $http) {
             console.log("controllerStudent");
             $scope.studentRegisterData ={};
-            $http.get('/api/listTeacherIDs').success(function(res){
+            $http.get('http://13.232.160.185:8080/api/listTeacherIDs').success(function(res){
               $scope.optionsTeacher = res;
       // console.log($scope.options);
   })
 
-            $http.get('/api/listParentIDs').success(function(res){
+            $http.get('http://13.232.160.185:8080/api/listParentIDs').success(function(res){
               $scope.optionsParent = res;
       // console.log($scope.options);
   })
