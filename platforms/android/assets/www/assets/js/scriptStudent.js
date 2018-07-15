@@ -23,7 +23,7 @@ myApp.config(function($routeProvider, $locationProvider){
     templateUrl : '/views/student/recommendationStudent.html',
     controller  : 'controllerStudent'
   });
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(false);
 });
 
 

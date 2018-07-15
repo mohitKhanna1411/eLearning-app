@@ -15,7 +15,7 @@ myApp.config(function($routeProvider, $locationProvider){
     templateUrl : '/views/parent/recommendationParent.html',
     controller  : 'controllerParent'
   });
-  $locationProvider.html5Mode(false);
+  $locationProvider.html5Mode(true);
 });
 
 // creating mainController

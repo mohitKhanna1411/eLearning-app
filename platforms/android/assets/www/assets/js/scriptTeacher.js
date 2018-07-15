@@ -32,7 +32,7 @@ myApp.config(function($routeProvider, $locationProvider){
     templateUrl : '/views/teacher/teacherRecommend.html',
     controller  : 'controllerTeacher'
   });
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(false);
 });
 
 myApp.filter('trusted', ['$sce', function ($sce) {
