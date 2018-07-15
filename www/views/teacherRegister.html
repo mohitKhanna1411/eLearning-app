@@ -9,18 +9,19 @@
   <link rel="stylesheet" href="../assets/css/angular-growl.min.css">
     <script>
         var app = angular.module('myApp', ['angular-growl']);
-        app.controller('tea', function($scope, $http) {
+        app.controller('tea', function($scope, $http,growl,$window) {
             console.log("controllerTeacher");
             $scope.teacherRegisterData ={};
 
                 $scope.teacherRegister = function() {
                     console.log($scope.teacherRegisterData);
     $http.post('http://13.232.160.185:8080/app/teacherRegister', $scope.teacherRegisterData).success(function(res){
+    // $http.post('http://127.0.0.1:8080/app/teacherRegister', $scope.teacherRegisterData).success(function(res){
         console.log(res);
 
         if(res.message === "you are registered successfully")
         {
-            $window.location.href = "index.html";
+            growl.success("Please login to Continue..." , { title: 'Registration Successful' });
         }
         else
         {

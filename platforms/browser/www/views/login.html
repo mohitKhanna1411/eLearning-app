@@ -17,7 +17,7 @@
                     $scope.login = function() {
 
                        if($scope.loginData.role == "teacher"){
-                            $http.post('http://127.0.0.1:8080/jwt/teacherLogin', $scope.loginData).success(function(res){
+                            $http.post('http://13.232.160.185:8080/jwt/teacherLogin', $scope.loginData).success(function(res){
             console.log(res);
             if(res.message === "You are logged in successfully")
             {
@@ -33,7 +33,7 @@
         })
             }
             if($scope.loginData.role == "student"){
-                    $http.post('http://127.0.0.1:8080/jwt/studentLogin', $scope.loginData).success(function(res){
+                    $http.post('http://13.232.160.185:8080/jwt/studentLogin', $scope.loginData).success(function(res){
             console.log(res);
             if(res.message === "You are logged in successfully")
             {
@@ -51,7 +51,7 @@
         })
             }
             if($scope.loginData.role == "parent"){
-                    $http.post('http://127.0.0.1:8080/jwt/parentLogin', $scope.loginData).success(function(res){
+                    $http.post('http://13.232.160.185:8080/jwt/parentLogin', $scope.loginData).success(function(res){
             console.log(res);
             if(res.message === "You are logged in successfully")
             {

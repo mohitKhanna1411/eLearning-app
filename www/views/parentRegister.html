@@ -9,21 +9,23 @@
   <link rel="stylesheet" href="../assets/css/angular-growl.min.css">
     <script>
         var app = angular.module('myApp', ['angular-growl']);
-        app.controller('par', function($scope, $http) {
+        app.controller('par', function($scope, $http,growl,$window) {
             $scope.parentRegisterData = {};
             $http.get('http://13.232.160.185:8080/api/listStudentIDs').success(function(res){
+            // $http.get('http://127.0.0.1:8080/api/listStudentIDs').success(function(res){
               $scope.options = res;
               console.log($scope.options);
           })
 
      $scope.parentRegister = function() {
-        console.log($scope.parentRegisterData + "hiiiiiiiiiiiiiiiii");
     $http.post('http://13.232.160.185:8080/app/parentRegister', $scope.parentRegisterData).success(function(res){
+
+    // $http.post('http://127.0.0.1:8080/app/parentRegister', $scope.parentRegisterData).success(function(res){
         console.log(res);
 
         if(res.message === "you are registered successfully")
         {
-            $window.location.href = "index.html";
+            growl.success("Please login to Continue..." , { title: 'Registration Successful' });
         }
         else
         {
@@ -86,7 +88,7 @@
                     <label for="email" class="col-md-4 control-label">Email</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control border-input" ng-model="parentRegisterData.email" required="" autofocus>
+                        <input type="email" class="form-control border-input" ng-model="parentRegisterData.email" required="" autofocus>
                     </div>
                 </div>
             </div>
