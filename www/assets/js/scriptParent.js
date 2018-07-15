@@ -3,10 +3,10 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
-  // .when('/views/dashboardParent.html', {
-  //   templateUrl : '/views/parent/reportParent.html',
-  //   controller  : 'controllerParent'
-  // })
+  .when('dashboardParent.html', {
+    templateUrl : 'android_asset/www/views/parent/reportParent.html',
+    controller  : 'controllerParent'
+  })
   .when('/reportParent', {
     templateUrl : 'android_asset/www/views/parent/reportParent.html',
     controller  : 'controllerParent'

@@ -4,32 +4,31 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
   .when('/views/dashboardTeacher.html', {
-    templateUrl : '/views/teacher/manageGradeTeacher.html',
+    templateUrl : 'android_asset/www/views/teacher/manageGradeTeacher.html',
     controller  : 'controllerTeacher'
   })
   .when('/manageGradeTeacher', {
-    templateUrl : '/views/teacher/manageGradeTeacher.html',
+    templateUrl : 'android_asset/www/views/teacher/manageGradeTeacher.html',
     controller  : 'controllerTeacher'
   })
-
   .when('/lessonsTeacher', {
-    templateUrl : '/views/teacher/lessonsTeacher.html',
+    templateUrl : 'android_asset/www/views/teacher/lessonsTeacher.html',
     controller  : 'controllerTeacher'
   })
   .when('/assesmentTeacher', {
-    templateUrl : '/views/teacher/assesmentTeacher.html',
+    templateUrl : 'android_asset/www/views/teacher/assesmentTeacher.html',
     controller  : 'controllerTeacher'
   })
   .when('/viewStudents', {
-    templateUrl : '/views/teacher/viewStudents.html',
+    templateUrl : 'android_asset/www/views/teacher/viewStudents.html',
     controller  : 'controllerTeacher'
   })
   .when('/overallRecommend', {
-    templateUrl : '/views/teacher/overallRecommend.html',
+    templateUrl : 'android_asset/www/views/teacher/overallRecommend.html',
     controller  : 'controllerTeacher'
   })
   .when('/teacherRecommend', {
-    templateUrl : '/views/teacher/teacherRecommend.html',
+    templateUrl : 'android_asset/www/views/teacher/teacherRecommend.html',
     controller  : 'controllerTeacher'
   });
   $locationProvider.html5Mode(true);

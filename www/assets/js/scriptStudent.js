@@ -3,24 +3,24 @@ var myApp = angular.module('myApp', ['ngRoute','ngStorage']);
 // configuring routes
 myApp.config(function($routeProvider, $locationProvider){
   $routeProvider
-  .when('/views/dashboardStudent.html', {
-    templateUrl : '/views/student/lessonsStudent.html',
+  .when('/dashboardStudent.html', {
+    templateUrl : 'android_asset/www/views/student/lessonsStudent.html',
     controller  : 'controllerStudent'
   })
   .when('/lessonsStudent', {
-    templateUrl : '/views/student/lessonsStudent.html',
+    templateUrl : 'android_asset/www/views/student/lessonsStudent.html',
     controller  : 'controllerStudent'
   })
   .when('/assesmentStudent', {
-    templateUrl : '/views/student/assesmentStudent.html',
+    templateUrl : 'android_asset/www/views/student/assesmentStudent.html',
     controller  : 'controllerStudent'
   })
   .when('/remedialStudent', {
-    templateUrl : '/views/student/remedialStudent.html',
+    templateUrl : 'android_asset/www/views/student/remedialStudent.html',
     controller  : 'controllerStudent'
   })
   .when('/recommendationStudent', {
-    templateUrl : '/views/student/recommendationStudent.html',
+    templateUrl : 'android_asset/www/views/student/recommendationStudent.html',
     controller  : 'controllerStudent'
   });
   $locationProvider.html5Mode(true);
